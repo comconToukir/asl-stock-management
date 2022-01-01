@@ -3,7 +3,7 @@ import ProductsEditDAO from "../dao/productsEditDAO.js"
 export default class ProductsEditController {
   static async apiPostProduct(req, res, next) {
     try {
-      const key = req.body.product_key
+      const key = req.body.key
       const name = req.body.name
       const category = req.body.category
       const seller = req.body.seller
@@ -37,7 +37,7 @@ export default class ProductsEditController {
 
   static async apiUpdateProduct(req, res, next) {
     try {
-      const key = req.body.product_key
+      const key = req.body.key
       const name = req.body.name
       const category = req.body.category
       const seller = req.body.seller
@@ -79,6 +79,7 @@ export default class ProductsEditController {
   }
   
   static async apiDeleteProduct(req, res, next) {
+    // console.log(req.query);
     try {
       const key = req.query.key
       // const userId = req.body.user_id

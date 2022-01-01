@@ -83,10 +83,10 @@ export default class ProductsEditDAO {
       }
     }
 
-  static async deleteProduct(key, user_id) {
+  static async deleteProduct(key) {
     try {
       const deleteResponse = await products.deleteOne({
-        key: key,
+        key: key
         // user_id: user_id,
       })
 

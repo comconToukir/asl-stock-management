@@ -1,0 +1,3 @@
+[submodule "asl-stock-management-frontend"]
+	path = frontend
+	url = https://github.com/comconToukir/asl-stock-management-frontend.git
