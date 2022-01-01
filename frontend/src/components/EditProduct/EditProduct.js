@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProductDataService from "../../services/GetProduct"
 import { Link, useLocation } from 'react-router-dom';
 
@@ -12,30 +12,43 @@ const EditProduct = () => {
   const [ changedSeller, setChangedSeller ] = useState(seller);
   const [ changedPrice, setChangedPrice ] = useState(price);
   const [ changedStock, setChangedStock ] = useState(stock);
-  const [ inputData, setInputData ] = useState({});
+  const [ inputData, setInputData ] = useState([]);
 
-  const onChangeName = e => {
+  useEffect(() => {
+    setInputData({
+      key: key,
+      name: changedName,
+      category: changedCategory,
+      seller: changedSeller,
+      price: changedPrice,
+      stock: changedStock,
+    });
+   
+  }, [changedName, changedCategory, changedSeller, changedPrice, changedStock])
+  
+  const onChangeName =(e) => {
     const newName = e.target.value;
+    
     setChangedName(newName);
   }
-  const onChangeCategory = e => {
+  const onChangeCategory = (e) => {
     const newCategory = e.target.value;
     setChangedCategory(newCategory);
   }
-  const onChangeSeller = e => {
+  const onChangeSeller = (e) => {
     const newSeller = e.target.value;
     setChangedSeller(newSeller);
   }
-  const onChangePrice = e => {
+  const onChangePrice = (e) => {
     const newPrice = e.target.value;
     setChangedPrice(newPrice);
   }
-  const onChangeStock = e => {
+  const onChangeStock = (e) => {
     const newStock = e.target.value;
     setChangedStock(newStock);
   }
 
-  const testRun = () => {
+  const updateData = () => {
     setInputData({
       key: key,
       name: changedName,
@@ -57,7 +70,7 @@ const EditProduct = () => {
           <div>
             <h4>You submitted successfully!</h4>
             <Link to={"/product/" + key} className="btn btn-success">
-              Back to Restaurant
+              Back to Product
             </Link>
           </div>
         ) : (
@@ -78,7 +91,7 @@ const EditProduct = () => {
                 type="text"
                 className='form-control ms-3 mb-3'
                 defaultValue={name}
-                onChange={onChangeName}
+                onChange={(e)=>onChangeName(e)}
                 />
             </div>
             <div className="d-flex">
@@ -87,7 +100,7 @@ const EditProduct = () => {
                 type="text"
                 className='form-control ms-3 mb-3'
                 defaultValue={category}
-                onChange={onChangeCategory}
+                onChange={(e)=>onChangeCategory(e)}
                 />
             </div>
             <div className="d-flex">
@@ -96,7 +109,7 @@ const EditProduct = () => {
                 type="text"
                 className='form-control ms-3 mb-3'
                 defaultValue={seller}
-                onChange={onChangeSeller}
+                onChange={(e)=>onChangeSeller(e)}
                 />
             </div>
             <div className="d-flex">
@@ -105,7 +118,7 @@ const EditProduct = () => {
                 type="number"
                 className='form-control ms-3 mb-3'
                 defaultValue={parseFloat(price)}
-                onChange={onChangePrice}
+                onChange={(e)=>onChangePrice(e)}
                 />
             </div>
             <div className="d-flex">
@@ -114,13 +127,13 @@ const EditProduct = () => {
                 type="number"
                 className='form-control ms-3 mb-3'
                 defaultValue={parseInt(stock)}
-                onChange={onChangeStock}
+                onChange={(e)=>onChangeStock(e)}
                 />
             </div>
           </div>
           <button 
             className='btn btn-warning'
-            onClick={()=>testRun()}
+            onClick={updateData}
           >
             Submit
           </button>

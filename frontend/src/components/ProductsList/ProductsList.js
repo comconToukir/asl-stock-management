@@ -16,7 +16,7 @@ const ProductsList = (props) => {
     retrieveCategories();
     retrieveSellers();
   }, []);
-
+  
   const onChangeSearchName = e => {
     const searchName = e.target.value;
     setSearchName(searchName);
@@ -230,8 +230,16 @@ const ProductsList = (props) => {
                     <td>{product.stock}</td>
                     <td>
                     <Link to={`/product/${product.key}`} className="btn btn-primary">
-                    {/* <Link to={`/product/${product.key}`} className="btn btn-light" element={<Product key={product.key} />}> */}
                       View
+                    </Link>
+                    </td>
+                    <td>
+                    <Link 
+                      className='btn btn-warning'
+                      to={"/product/"+product.key+"/edit"}
+                      state= {product}
+                      >
+                        Edit
                     </Link>
                     </td>
                   </tr>

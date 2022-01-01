@@ -31,7 +31,7 @@ function App() {
                   <Link className="nav-link" to={"/seller"}>Seller</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to={"/edit"}>Add product</Link>
+                  <Link className="nav-link" to={"/add-product"}>Add product</Link>
                 </li>
               </ul>
             </div>
@@ -51,19 +51,15 @@ function App() {
               element={<Product />}
             />
             <Route 
-            path="/product/:key/edit"
-            element={<EditProduct />}
+              path="/product/:key/edit"
+              element={<EditProduct />}
             />
             <Route 
               path="/categories"
-              render={(props) => (
-                <Category {...props} />
-              )}
+              element={<Category />}
             /><Route 
               path="/seller"
-              render={(props) => (
-                <Company {...props} />
-              )}
+              element={<Company />}
             />
           </Routes>
         </div>
