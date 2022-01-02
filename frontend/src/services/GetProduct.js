@@ -32,6 +32,10 @@ class ProductDataService {
   getSellers() {
     return http.get(`/seller`)
   }
+
+  updateStock(data) {
+    return http.post(`/stock`, data)
+  }
 }
 
 export default new ProductDataService();

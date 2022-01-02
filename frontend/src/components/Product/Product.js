@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ProductDataService from "../../services/GetProduct"
-import { Link, useParams, Route, Routes } from "react-router-dom";
-import EditProduct from '../EditProduct/EditProduct';
+import { Link, useParams } from "react-router-dom";
 
 const Product = (props) => {
   let { key } = useParams();
@@ -51,14 +50,21 @@ const Product = (props) => {
       <strong>Stock: </strong><span>{product.stock}</span><br/>
       <div className="d-flex">
       <Link 
-        className='btn btn-warning m-1'
+        className='btn btn-primary m-1'
+        to={"/product/"+product.key+"/stock-update"}
+        state={product}
+        >
+          Stock Update
+      </Link>
+      <Link 
+        className='btn btn-warning m-1 ms-auto'
         to={"/product/"+product.key+"/edit"}
-        state= {product}
+        state={product}
         >
           Edit
       </Link>
       <button 
-        className="btn btn-danger m-1 ms-auto"
+        className="btn btn-danger m-1"
         onClick={()=>deleteProduct(key)}
         >Delete Product</button>
       </div>

@@ -9,6 +9,7 @@ import ProductsList from "./components/ProductsList/ProductsList";
 import Category from "./components/Category/Category";
 import Company from "./components/Company/Company";
 import EditProduct from "./components/EditProduct/EditProduct";
+import Stock from "./components/Stock/Stock";
 
 function App() {
   return (
@@ -53,6 +54,10 @@ function App() {
             <Route 
               path="/product/:key/edit"
               element={<EditProduct />}
+            />
+            <Route 
+              path="/product/:key/stock-update"
+              element={<Stock />}
             />
             <Route 
               path="/categories"

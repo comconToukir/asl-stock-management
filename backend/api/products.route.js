@@ -19,5 +19,6 @@ router.route("/seller").get(ProductsController.apiGetProductsBySeller);
 router.route("/add-product").post(ProductsEditController.apiPostProduct)
 router.route("/edit-product").put(ProductsEditController.apiUpdateProduct)
 router.route("/delete").delete(ProductsEditController.apiDeleteProduct)
+router.route("/stock").post(ProductsEditController.apiUpdateStock)
 
 export default router;

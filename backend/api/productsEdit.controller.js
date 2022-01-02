@@ -1,6 +1,28 @@
 import ProductsEditDAO from "../dao/productsEditDAO.js"
+import StockUpdateDAO from "../dao/stockUpdateDAO.js"
 
 export default class ProductsEditController {
+  static async apiUpdateStock(req, res, next) {
+    try {
+      const key = req.body.key
+      const stockIn = req.body.stockIn
+      const stockOut = req.body.stockOut
+      const availableStock = req.body.availableStock
+      const date = new Date()
+
+      const UpdateResponse = await StockUpdateDAO.updateStock(
+        key,
+        stockIn,
+        stockOut,
+        availableStock,
+        date,
+      )
+      res.json({ status: "success" })
+    } catch (e) {
+      res.status(500).json({ error: e.message })
+    }
+  }
+
   static async apiPostProduct(req, res, next) {
     try {
       const key = req.body.key
