@@ -14,14 +14,18 @@ export default class StockUpdateDAO {
     }
   }
 
-  static async updateStock(key, stockIn, stockOut, availableStock, date) {
+  static async updateStock(key, stockIn, stockOut, availableStock, minute, hour, date, month, year) {
     try {
       const stockDocument = {
         key: key,
         stockIn: stockIn,
         stockOut: stockOut,
         availableStock: availableStock,
-        date: date
+        minute: minute,
+        hour: hour,
+        date: date,
+        month: month,
+        year: year,
       }
 
       return await stocks.insertOne(stockDocument)
