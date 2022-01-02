@@ -35,7 +35,7 @@ const ProductsList = (props) => {
   const retrieveProducts = () => {
     ProductDataService.getAll()
       .then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         setProducts(response.data.products);
       })
       .catch (e => {
@@ -46,7 +46,7 @@ const ProductsList = (props) => {
   const retrieveCategories = () => {
     ProductDataService.getCategories()
       .then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         setCategories(["All Categories"].concat(response.data));
       })
       .catch(e => {
@@ -57,7 +57,7 @@ const ProductsList = (props) => {
   const retrieveSellers = () => {
     ProductDataService.getSellers()
       .then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         setSellers(["All Companies"].concat(response.data));
       })
       .catch(e => {
@@ -72,7 +72,7 @@ const ProductsList = (props) => {
   const find = (query, by) => {
     ProductDataService.find(query, by)
       .then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         setProducts(response.data.products)
       })
       .catch(e => {
@@ -99,6 +99,17 @@ const ProductsList = (props) => {
       find(searchSeller, "seller");
     }
   }
+
+  // const getProductStock = (productKey) => {
+  //   ProductDataService.getStock(productKey)
+  //   .then(response=> {
+  //     console.log(response.data);
+  //   })
+  //   .catch(e => {
+  //     console.log(e);
+  //   })
+
+  // }
 
   return (
     <div className='container'>
@@ -228,6 +239,7 @@ const ProductsList = (props) => {
                     <td>{product.seller}</td>
                     <td>{product.price}</td>
                     <td>{product.stock}</td>
+                    {/* <td>{getProductStock(product.key)}</td> */}
                     <td>
                     <Link to={`/product/${product.key}`} className="btn btn-primary">
                       View

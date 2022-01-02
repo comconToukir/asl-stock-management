@@ -34,7 +34,11 @@ class ProductDataService {
   }
 
   updateStock(data) {
-    return http.post(`/stock`, data)
+    return http.post(`/stock`, data);
+  }
+
+  getStock(key) {
+    return http.get(`/stock`, {"key": key});
   }
 }
 
