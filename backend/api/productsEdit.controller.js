@@ -2,6 +2,34 @@ import ProductsEditDAO from "../dao/productsEditDAO.js"
 import StockUpdateDAO from "../dao/stockUpdateDAO.js"
 
 export default class ProductsEditController {
+
+  static async apiGetStocks(req, res, next) {
+    const productsPerPage = req.query.productsPerPage ? parseInt(req.query.productsPerPage, 10) : 20
+    const page = req.query.page ? parseInt(req.query.page, 10) : 0
+
+    let filters = {}
+    if (req.body.key) {
+      filters.key = req.body.key
+    } else if (req.body.month) {
+      filters.month = req.body.month
+    }
+
+    const { productsList, totalNumProducts } = await StockUpdateDAO.getStocks({
+      filters,
+      page,
+      productsPerPage,
+    })
+
+    let response = {
+      products: productsList,
+      page: page,
+      filters: filters,
+      entries_per_page: productsPerPage,
+      total_results: totalNumProducts,
+    }
+    res.json(response)
+  }
+  
   static async apiUpdateStock(req, res, next) {
     try {
       const key = req.body.key;
@@ -15,7 +43,7 @@ export default class ProductsEditController {
       const month = d.getMonth();
       const year = d.getFullYear();
 
-      const UpdateResponse = await StockUpdateDAO.updateStock(
+      const StockResponse = await StockUpdateDAO.updateStock(
         key,
         stockIn,
         stockOut,
