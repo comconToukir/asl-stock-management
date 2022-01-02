@@ -10,6 +10,8 @@ import Category from "./components/Category/Category";
 import Company from "./components/Company/Company";
 import EditProduct from "./components/EditProduct/EditProduct";
 import Stock from "./components/Stock/Stock";
+import StockReport from "./components/StockReport/StockReport";
+import SalesReport from "./components/SalesReport/SalesReport";
 
 function App() {
   return (
@@ -33,6 +35,12 @@ function App() {
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" to={"/add-product"}>Add product</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to={"/stock-report"}>Stock Report</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to={"/sales-report"}>Sales Report</Link>
                 </li>
               </ul>
             </div>
@@ -62,9 +70,18 @@ function App() {
             <Route 
               path="/categories"
               element={<Category />}
-            /><Route 
+            />
+            <Route 
               path="/seller"
               element={<Company />}
+            />
+            <Route 
+              path="/stock-report"
+              element={<StockReport />}
+            />
+            <Route 
+              path="/sales-report"
+              element={<SalesReport />}
             />
           </Routes>
         </div>

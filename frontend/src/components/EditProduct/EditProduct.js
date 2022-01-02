@@ -24,7 +24,7 @@ const EditProduct = () => {
       stock: changedStock,
     });
    
-  }, [changedName, changedCategory, changedSeller, changedPrice, changedStock])
+  }, [key, changedName, changedCategory, changedSeller, changedPrice, changedStock])
   
   const onChangeName =(e) => {
     const newName = e.target.value;
