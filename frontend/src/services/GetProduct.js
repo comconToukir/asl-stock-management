@@ -42,14 +42,31 @@ class ProductDataService {
   getCategories() {
     return http.get(`/categories`);
   }
+
+  editCategory(data) {
+    return http.put(`/categories`, data);
+  }
+
+  deleteCategory(data) {
+    return http.delete(`/categories`, data);
+  }
   
+  getCompanies() {
+    return http.get(`/companies`)
+  }
+
   addCompany(data) {
     return http.post(`/companies`, data)
   }
   
-  getSellers() {
-    return http.get(`/companies`)
+  editCompany(data) {
+    return http.put(`/companies`, data);
   }
+
+  deleteCompany(data) {
+    return http.delete(`/companies`, data);
+  }
+  
   // getStock(query, by="name", page = 0) {
   //   return http.get(`?${by}=${query}&page=${page}`);
   // }

@@ -33,11 +33,39 @@ export default class CompaniesDAO {
   static async getCompanies() {
     let companiesList = [];
     try {
-      companiesList = await companies.distinct("companyName")
+      companiesList = await companies.find().toArray()
       return companiesList;
     } catch (e) {
       console.error(`Unable to get companiesList, ${e}`)
       return companiesList;
+    }
+  }
+
+  static async editCompany(id, companyName) {
+    try {
+      const updateResponse = await companies.updateOne(
+        { _id: ObjectId(id)},
+        { $set: {
+          companyName: companyName,
+          modified_on: new Date(),
+        }}
+      )
+      return updateResponse
+    } catch (e) {
+      console.error(`Unable to update company: ${e}`)
+      return { error: e }
+    }
+  }
+
+  static async deleteCompany(id) {
+    try {
+      const deleteResponse = await companies.deleteOne({
+        _id: ObjectId(id)
+      })
+      return deleteResponse
+    } catch (e) {
+      console.error(`Unable to delete product: ${e}`)
+      return { error: e}
     }
   }
 

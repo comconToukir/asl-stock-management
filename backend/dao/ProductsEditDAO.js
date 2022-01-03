@@ -79,7 +79,7 @@ export default class ProductsEditDAO {
         return updateResponse
       } catch (e) {
         console.error(`Unable to update product: ${e}`)
-        return { error: e}
+        return { error: e }
       }
     }
 

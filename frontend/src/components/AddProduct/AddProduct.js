@@ -105,7 +105,7 @@ const EditProduct = () => {
           <div>
             <h4>You submitted successfully!</h4>
             <Link to={"/product/" + changedKey} className="btn btn-success">
-              Back to Restaurant
+              Back to Product
             </Link>
           </div>
         ) : (

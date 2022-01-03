@@ -107,6 +107,13 @@ const Company = () => {
               Search
             </button>
           </div>
+          
+          <Link 
+            className='btn btn-outline-secondary ms-1'
+            to={"/add-company"}
+            >
+              Add Company
+          </Link>
         </div>
       </div>
 

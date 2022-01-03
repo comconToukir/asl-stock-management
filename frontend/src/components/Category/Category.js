@@ -107,6 +107,12 @@ const Category = () => {
               Search
             </button>
           </div>
+          <Link 
+            className='btn btn-outline-secondary ms-1'
+            to={"/add-category"}
+            >
+              Add Category
+          </Link>
         </div>
       </div>
 

@@ -12,6 +12,12 @@ import EditProduct from "./components/EditProduct/EditProduct";
 import Stock from "./components/Stock/Stock";
 import StockReport from "./components/StockReport/StockReport";
 import SalesReport from "./components/SalesReport/SalesReport";
+import AddCategory from "./components/Category/AddCategory/AddCategory";
+import AddCompany from "./components/Company/AddCompany/AddCompany";
+import CategoryList from "./components/Category/CategoryList/CategoryList";
+import EditCategory from "./components/Category/EditCategory/EditCategory";
+import CompanyList from "./components/Company/CompanyList/CompanyList";
+import EditCompany from "./components/Company/EditCompany/EditCompany";
 
 function App() {
   return (
@@ -69,11 +75,11 @@ function App() {
             />
             <Route 
               path="/categories"
-              element={<Category />}
+              element={<CategoryList />}
             />
             <Route 
               path="/companies"
-              element={<Company />}
+              element={<CompanyList />}
             />
             <Route 
               path="/stock-report"
@@ -82,6 +88,22 @@ function App() {
             <Route 
               path="/sales-report"
               element={<SalesReport />}
+            />
+            <Route 
+              path="/add-category"
+              element={<AddCategory />}
+            />
+            <Route 
+              path="/category/:id"
+              element={<EditCategory />}
+            />
+            <Route 
+              path="/add-company"
+              element={<AddCompany />}
+            />
+            <Route 
+              path="/company/:id"
+              element={<EditCompany />}
             />
           </Routes>
         </div>

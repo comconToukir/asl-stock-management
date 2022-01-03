@@ -8,12 +8,16 @@ const router = express.Router();
 
 router.route("/").get(ProductsController.apiGetProducts);
 router.route("/product/:key").get(ProductsController.apiGetProductByKey);
-// router.route("/categories").get(ProductsController.apiGetProductsByCategory);
-// router.route("/seller").get(ProductsController.apiGetProductsBySeller);
-router.route("/categories").post(CategoriesController.apiPostCategory);
+
 router.route("/categories").get(CategoriesController.apiGetCategories);
+router.route("/categories").post(CategoriesController.apiPostCategory);
+router.route("/categories").put(CategoriesController.apiEditCategory);
+router.route("/categories").delete(CategoriesController.apiDeleteCategory);
+
 router.route("/companies").post(CompaniesController.apiPostCompany);
 router.route("/companies").get(CompaniesController.apiGetCompanies);
+router.route("/companies").put(CompaniesController.apiEditCompany);
+router.route("/companies").delete(CompaniesController.apiDeleteCompany);
 
 router.route("/add-product").post(ProductsEditController.apiPostProduct)
 router.route("/edit-product").put(ProductsEditController.apiUpdateProduct)
