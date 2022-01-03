@@ -1,3 +1,4 @@
+import { response } from "express";
 import mongodb from "mongodb";
 
 let companies;
@@ -18,10 +19,16 @@ export default class CompaniesDAO {
   }
 
   static async addCompany(companyName) {
+    const companyDoc = {
+      companyName : companyName,
+      date_added: new Date()
+    }
     try {
-      const companyDoc = {
-        companyName : companyName,
-        date_added: new Date()
+      const checkCompanyName = companyName;
+      const checkData = await companies.findOne({ companyName: checkCompanyName})
+      if (checkData != null) {
+        res.json('Company name already exist');
+        return
       }
       return await companies.insertOne(companyDoc)
     } catch (e) {
