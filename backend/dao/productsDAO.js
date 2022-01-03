@@ -69,16 +69,16 @@ export default class productsDAO {
     }
   }
 
-  static async getProductsByCategory() {
-    let categories = [];
-    try {
-      categories = await products.distinct("category")
-      return categories;
-    } catch (e) {
-      console.error(`Unable to get categories, ${e}`)
-      return categories;
-    }
-  }
+  // static async getProductsByCategory() {
+  //   let categories = [];
+  //   try {
+  //     categories = await products.distinct("category")
+  //     return categories;
+  //   } catch (e) {
+  //     console.error(`Unable to get categories, ${e}`)
+  //     return categories;
+  //   }
+  // }
 
   static async getProductsBySeller() {
     let sellers = [];

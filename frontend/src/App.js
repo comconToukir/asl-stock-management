@@ -31,7 +31,7 @@ function App() {
                   <Link className="nav-link" to={"/categories"}>Categories</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to={"/seller"}>Seller</Link>
+                  <Link className="nav-link" to={"/companies"}>Company</Link>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" to={"/add-product"}>Add product</Link>
@@ -72,7 +72,7 @@ function App() {
               element={<Category />}
             />
             <Route 
-              path="/seller"
+              path="/companies"
               element={<Company />}
             />
             <Route 

@@ -25,22 +25,31 @@ class ProductDataService {
     return http.delete(`delete?key=${key}`);
   }
 
-  getCategories() {
-    return http.get(`/categories`);
-  }
-
-  getSellers() {
-    return http.get(`/seller`)
-  }
-
+  
+  
   updateStock(data) {
     return http.post(`/stock`, data);
   }
-
+  
   getStock(data) {
     return http.get(`/stock`, data);
   }
-
+  
+  addCategory(data) {
+    return http.post(`/categories`, data);
+  }
+  
+  getCategories() {
+    return http.get(`/categories`);
+  }
+  
+  addCompany(data) {
+    return http.post(`/companies`, data)
+  }
+  
+  getSellers() {
+    return http.get(`/companies`)
+  }
   // getStock(query, by="name", page = 0) {
   //   return http.get(`?${by}=${query}&page=${page}`);
   // }

@@ -11,15 +11,9 @@ export default class ProductsEditController {
     if (req.body.key) {
       filters.key = req.body.key
     } else if (req.body.greaterThan && req.body.lesserThan) {
-      // filters.month = req.body.month
       filters.greaterThan = req.body.greaterThan
       filters.lesserThan = req.body.lesserThan
     }
-    // } else if (req.body.date) {
-      // filters.date = req.body.date
-      // filters.greaterThan = req.body.greaterThan
-      // filters.lesserThan = req.body.lesserThan
-    // }
 
     const { productsList, totalNumProducts } = await StockUpdateDAO.getStocks({
       filters,
@@ -44,22 +38,12 @@ export default class ProductsEditController {
       const stockOut = req.body.stockOut;
       const availableStock = req.body.availableStock;
       const d = new Date();
-      // const minute = d.getMinutes().toString();
-      // const hour = d.getHours().toString();
-      // const date = d.getDate().toString();
-      // const month = d.getMonth().toString();
-      // const year = d.getFullYear().toString();
 
       const StockResponse = await StockUpdateDAO.updateStock(
         key,
         stockIn,
         stockOut,
         availableStock,
-        // minute,
-        // hour,
-        // date,
-        // month,
-        // year,
         d,
       )
       res.json({ status: "success" })
@@ -78,10 +62,6 @@ export default class ProductsEditController {
       const stock = req.body.stock
       const remark = req.body.remark
       const img = req.body.img
-      // const userInfo = {
-      //   name: req.body.name,
-      //   _id: req.body.user_id
-      // }
       const date = new Date()
 
       const editResponse = await ProductsEditDAO.addProduct(
@@ -93,7 +73,6 @@ export default class ProductsEditController {
         stock,
         remark,
         img,
-        // userInfo,
         date,
       )
       res.json({ status: "success" })
@@ -124,7 +103,6 @@ export default class ProductsEditController {
         stock,
         remark,
         img,
-        // userInfo,
         date,
       )
 
@@ -146,14 +124,10 @@ export default class ProductsEditController {
   }
   
   static async apiDeleteProduct(req, res, next) {
-    // console.log(req.query);
     try {
       const key = req.query.key
-      // const userId = req.body.user_id
-      // console.log(reviewId)
       const editResponse = await ProductsEditDAO.deleteProduct(
         key,
-        // userId,
       )
       res.json({ status: "success" })
     } catch (e) {

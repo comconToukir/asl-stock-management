@@ -45,23 +45,23 @@ export default class ProductsController {
     }
   }
 
-  static async apiGetProductsByCategory(req, res, next) {
-    try {
-      let categories = await ProductsDAO.getProductsByCategory();
-      res.json(categories)
-    } catch (e) {
-      console.log(`api, ${e}`)
-      res.status(500).json({ error: e })
-    }
-  }
+  // static async apiGetProductsByCategory(req, res, next) {
+  //   try {
+  //     let categories = await ProductsDAO.getProductsByCategory();
+  //     res.json(categories)
+  //   } catch (e) {
+  //     console.log(`api, ${e}`)
+  //     res.status(500).json({ error: e })
+  //   }
+  // }
 
-  static async apiGetProductsBySeller(req, res, next) {
-    try {
-      let sellers = await ProductsDAO.getProductsBySeller();
-      res.json(sellers)
-    } catch (e) {
-      console.log(`api, ${e}`)
-      res.status(500).json({ error: e })
-    }
-  }
+  // static async apiGetProductsBySeller(req, res, next) {
+  //   try {
+  //     let sellers = await ProductsDAO.getProductsBySeller();
+  //     res.json(sellers)
+  //   } catch (e) {
+  //     console.log(`api, ${e}`)
+  //     res.status(500).json({ error: e })
+  //   }
+  // }
 }

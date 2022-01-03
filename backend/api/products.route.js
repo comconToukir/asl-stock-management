@@ -1,20 +1,19 @@
 import express from "express";
 import ProductsController from "./products.controller.js";
 import ProductsEditController from "./productsEdit.controller.js";
+import CategoriesController from "./categories.controller.js";
+import CompaniesController from "./companies.controller.js";
 
 const router = express.Router();
 
 router.route("/").get(ProductsController.apiGetProducts);
 router.route("/product/:key").get(ProductsController.apiGetProductByKey);
-router.route("/categories").get(ProductsController.apiGetProductsByCategory);
-router.route("/seller").get(ProductsController.apiGetProductsBySeller);
-
-// router
-  // .route("/edit")
-  // .route("/product")
-  // .post(ProductsEditController.apiPostProduct)
-  // .put(ProductsEditController.apiUpdateProduct)
-  // .delete(ProductsEditController.apiDeleteProduct)
+// router.route("/categories").get(ProductsController.apiGetProductsByCategory);
+// router.route("/seller").get(ProductsController.apiGetProductsBySeller);
+router.route("/categories").post(CategoriesController.apiPostCategory);
+router.route("/categories").get(CategoriesController.apiGetCategories);
+router.route("/companies").post(CompaniesController.apiPostCompany);
+router.route("/companies").get(CompaniesController.apiGetCompanies);
 
 router.route("/add-product").post(ProductsEditController.apiPostProduct)
 router.route("/edit-product").put(ProductsEditController.apiUpdateProduct)
