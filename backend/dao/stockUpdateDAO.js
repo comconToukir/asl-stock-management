@@ -22,10 +22,28 @@ export default class StockUpdateDAO {
     let query
     if (filters) {
       if ("key" in filters) {
-        query = { "key": { $eq: filters["key"]}}
-      } else if ("month" in filters) {
-        query = { "month": { $eq: filters["month"]}}
+        // query = { "key": { $eq: filters["key"]}}
+        query = { $text: { $search: filters["key"] } }
+      } else if ("greaterThan" in filters && "lesserThan" in filters) {
+        // query = { "month": { $eq: filters["month"]}}
+        // query = { $text: { $search: filters["month"] } } // working
+        query = {
+          stock_update_date: {
+            $gte: new Date(filters["greaterThan"]),
+            $lt: new Date(filters["lesserThan"])
+          }
+        }
       }
+      // } else if ("greaterThan" in filters && "lesserThan" in filters) {
+        // query = { $text: { $search: filters["date"] } } // working
+        // query = { "date": { $eq: filters["date"]}}
+        // query = {
+          // stock_update_date: {
+            // $gte: new Date(filters["greaterThan"]),
+            // $lt: new Date(filters["lesserThan"])
+          // }
+        // }
+      // }
     } 
 
     let cursor
@@ -53,18 +71,19 @@ export default class StockUpdateDAO {
     }
   }
 
-  static async updateStock(key, stockIn, stockOut, availableStock, minute, hour, date, month, year) {
+  static async updateStock(key, stockIn, stockOut, availableStock, d) {
     try {
       const stockDocument = {
         key: key,
         stockIn: stockIn,
         stockOut: stockOut,
         availableStock: availableStock,
-        minute: minute,
-        hour: hour,
-        date: date,
-        month: month,
-        year: year,
+        // minute: minute,
+        // hour: hour,
+        // date: date,
+        // month: month,
+        // year: year,
+        stock_update_date: d,
       }
 
       return await stocks.insertOne(stockDocument)

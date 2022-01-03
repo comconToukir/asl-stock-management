@@ -10,9 +10,16 @@ export default class ProductsEditController {
     let filters = {}
     if (req.body.key) {
       filters.key = req.body.key
-    } else if (req.body.month) {
-      filters.month = req.body.month
+    } else if (req.body.greaterThan && req.body.lesserThan) {
+      // filters.month = req.body.month
+      filters.greaterThan = req.body.greaterThan
+      filters.lesserThan = req.body.lesserThan
     }
+    // } else if (req.body.date) {
+      // filters.date = req.body.date
+      // filters.greaterThan = req.body.greaterThan
+      // filters.lesserThan = req.body.lesserThan
+    // }
 
     const { productsList, totalNumProducts } = await StockUpdateDAO.getStocks({
       filters,
@@ -37,22 +44,23 @@ export default class ProductsEditController {
       const stockOut = req.body.stockOut;
       const availableStock = req.body.availableStock;
       const d = new Date();
-      const minute = d.getMinutes();
-      const hour = d.getHours();
-      const date = d.getDate();
-      const month = d.getMonth();
-      const year = d.getFullYear();
+      // const minute = d.getMinutes().toString();
+      // const hour = d.getHours().toString();
+      // const date = d.getDate().toString();
+      // const month = d.getMonth().toString();
+      // const year = d.getFullYear().toString();
 
       const StockResponse = await StockUpdateDAO.updateStock(
         key,
         stockIn,
         stockOut,
         availableStock,
-        minute,
-        hour,
-        date,
-        month,
-        year,
+        // minute,
+        // hour,
+        // date,
+        // month,
+        // year,
+        d,
       )
       res.json({ status: "success" })
     } catch (e) {

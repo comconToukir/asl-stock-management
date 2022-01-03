@@ -37,9 +37,13 @@ class ProductDataService {
     return http.post(`/stock`, data);
   }
 
-  getStock(key) {
-    return http.get(`/stock`, {"key": key});
+  getStock(data) {
+    return http.get(`/stock`, data);
   }
+
+  // getStock(query, by="name", page = 0) {
+  //   return http.get(`?${by}=${query}&page=${page}`);
+  // }
 }
 
 export default new ProductDataService();

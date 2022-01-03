@@ -21,7 +21,7 @@ const EditProduct = () => {
       category: changedCategory,
       seller: changedSeller,
       price: changedPrice,
-      stock: changedStock,
+      stock: parseInt(changedStock),
     });
    
   }, [key, changedName, changedCategory, changedSeller, changedPrice, changedStock])
@@ -43,10 +43,10 @@ const EditProduct = () => {
     const newPrice = e.target.value;
     setChangedPrice(newPrice);
   }
-  const onChangeStock = (e) => {
-    const newStock = e.target.value;
-    setChangedStock(newStock);
-  }
+  // const onChangeStock = (e) => {
+  //   const newStock = e.target.value;
+  //   setChangedStock(newStock);
+  // }
 
   const updateData = () => {
     setInputData({
@@ -55,7 +55,7 @@ const EditProduct = () => {
       category: changedCategory,
       seller: changedSeller,
       price: changedPrice,
-      stock: changedStock,
+      stock: parseInt(changedStock),
     });
     console.log(inputData);
     ProductDataService.updateProduct(inputData)
@@ -127,7 +127,8 @@ const EditProduct = () => {
                 type="number"
                 className='form-control ms-3 mb-3'
                 defaultValue={parseInt(stock)}
-                onChange={(e)=>onChangeStock(e)}
+                disabled
+                // onChange={(e)=>onChangeStock(e)}
                 />
             </div>
           </div>
