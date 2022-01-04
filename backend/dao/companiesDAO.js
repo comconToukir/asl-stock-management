@@ -1,5 +1,6 @@
 import { response } from "express";
 import mongodb from "mongodb";
+const ObjectId = mongodb.ObjectId;
 
 let companies;
 
@@ -66,9 +67,7 @@ export default class CompaniesDAO {
 
   static async deleteCompany(id) {
     try {
-      const deleteResponse = await companies.deleteOne({
-        _id: ObjectId(id)
-      })
+      const deleteResponse = await companies.deleteOne({"_id": ObjectId(id)})
       return deleteResponse
     } catch (e) {
       console.error(`Unable to delete product: ${e}`)

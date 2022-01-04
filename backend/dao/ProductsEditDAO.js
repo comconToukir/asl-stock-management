@@ -1,5 +1,5 @@
 import mongodb from "mongodb";
-// const ObjectId = mongodb.ObjectId
+const ObjectId = mongodb.ObjectId
 
 let products
 
@@ -17,28 +17,28 @@ export default class ProductsEditDAO {
   }
 
   static async addProduct(
-    key,
+    // key,
     name,
-    category,
-    seller,
-    price,
-    stock,
-    remark,
-    img,
+    categoryId,
+    companyId,
+    // price,
+    // stock,
+    // remark,
+    // img,
     // userInfo,
     date,
   ) {
     try {
       const newProduct = {
-        key: key,
+        // key: key,
         // user_id: userInfo._id,
         name: name,
-        category: category,
-        seller: seller,
-        price: price,
-        stock: stock,
-        remark: remark,
-        img: img,
+        categoryId: ObjectId(categoryId),
+        companyId: ObjectId(companyId),
+        // price: price,
+        // stock: stock,
+        // remark: remark,
+        // img: img,
         added_on: date,
       }
 

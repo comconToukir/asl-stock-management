@@ -54,25 +54,25 @@ export default class ProductsEditController {
 
   static async apiPostProduct(req, res, next) {
     try {
-      const key = req.body.key
+      // const key = req.body.key
       const name = req.body.name
-      const category = req.body.category
-      const seller = req.body.seller
-      const price = req.body.price
-      const stock = req.body.stock
-      const remark = req.body.remark
-      const img = req.body.img
+      const categoryId = req.body.categoryId
+      const companyId = req.body.companyId
+      // const price = req.body.price
+      // const stock = req.body.stock
+      // const remark = req.body.remark
+      // const img = req.body.img
       const date = new Date()
 
       const editResponse = await ProductsEditDAO.addProduct(
-        key,
+        // key,
         name,
-        category,
-        seller,
-        price,
-        stock,
-        remark,
-        img,
+        categoryId,
+        companyId,
+        // price,
+        // stock,
+        // remark,
+        // img,
         date,
       )
       res.json({ status: "success" })

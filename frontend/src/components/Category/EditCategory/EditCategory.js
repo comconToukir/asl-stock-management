@@ -79,12 +79,12 @@ const EditCategory = () => {
               >
                 Edit
               </button>
-              <button 
+              {/* <button 
                 className='btn btn-danger'
                 onClick={()=>deleteCategory()}
               >
                 Delete
-              </button>
+              </button> */}
             </div>
           </div>
         </>

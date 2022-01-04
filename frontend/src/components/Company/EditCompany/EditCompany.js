@@ -79,12 +79,12 @@ const EditCompany = () => {
               >
                 Edit
               </button>
-              <button 
+              {/* <button 
                 className='btn btn-danger'
                 onClick={()=>deleteCompany()}
               >
                 Delete
-              </button>
+              </button> */}
             </div>
           </div>
         </>
