@@ -1,4 +1,4 @@
-import mongodb from "mongodb";
+import mongodb, { ObjectId } from "mongodb";
 //dao = data access oject
  
 let products;
@@ -20,16 +20,23 @@ export default class productsDAO {
   static async getProducts({
     filters = null,
     page = 0,
-    productsPerPage = 10,
+    productsPerPage = 20,
   } = {}) {
     let query
     if (filters) {
       if ("name" in filters) {
         query = {$text: {$search: filters["name"]}}
-      } else if ("category" in filters) {
-        query = {"category": { $eq: filters["category"]}}
-      } else if ("seller" in filters) {
-        query = {"seller": {$eq: filters["seller"]}}
+      } else if ("categoryId" in filters && "companyId" in filters) {
+        query = {
+          $and: [
+            {"categoryId": ObjectId(filters.categoryId)},
+            {"companyId": ObjectId(filters.companyId)}
+          ]
+        }
+      } else if ("categoryId" in filters) {
+        query = {"categoryId": { $eq: ObjectId(filters["categoryId"])}}
+      } else if ("companyId" in filters) {
+        query = {"companyId": { $eq: ObjectId(filters["companyId"])}}
       }
     }
 

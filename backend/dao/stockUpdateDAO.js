@@ -1,4 +1,4 @@
-import mongodb from "mongodb"
+import mongodb, { ObjectId } from "mongodb"
 
 let stocks
 
@@ -71,19 +71,41 @@ export default class StockUpdateDAO {
     }
   }
 
-  static async updateStock(key, stockIn, stockOut, availableStock, d) {
+  static async updateStockIn(productId, stockIn, d) {
     try {
       const stockDocument = {
-        key: key,
+        productId: ObjectId(productId),
         stockIn: stockIn,
-        stockOut: stockOut,
-        availableStock: availableStock,
+        stock_update_date: d,
+        // stockOut: stockOut,
+        // availableStock: availableStock,
         // minute: minute,
         // hour: hour,
         // date: date,
         // month: month,
         // year: year,
+      }
+
+      return await stocks.insertOne(stockDocument)
+    } catch (e) {
+      console.error(`Unable to post stock: ${e}`)
+      return { error: e }
+    }
+  }
+
+  static async updateStockOut(productId, stockOut, d) {
+    try {
+      const stockDocument = {
+        productId: ObjectId(productId),
+        stockOut: stockOut,
         stock_update_date: d,
+        // stockOut: stockOut,
+        // availableStock: availableStock,
+        // minute: minute,
+        // hour: hour,
+        // date: date,
+        // month: month,
+        // year: year,
       }
 
       return await stocks.insertOne(stockDocument)

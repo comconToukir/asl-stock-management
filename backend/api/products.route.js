@@ -6,7 +6,7 @@ import CompaniesController from "./companies.controller.js";
 
 const router = express.Router();
 
-router.route("/").get(ProductsController.apiGetProducts);
+router.route("/stock-in").get(ProductsController.apiGetProducts);
 router.route("/product/:key").get(ProductsController.apiGetProductByKey);
 
 router.route("/categories").get(CategoriesController.apiGetCategories);

@@ -2,16 +2,20 @@ import ProductsDAO from "../dao/productsDAO.js";
 
 export default class ProductsController {
   static async apiGetProducts(req, res, next) {
+    console.log(req.body)
     const productsPerPage = req.query.productsPerPage ? parseInt(req.query.productsPerPage, 10) : 20
     const page = req.query.page ? parseInt(req.query.page, 10) : 0
 
     let filters = {};
-    if (req.query.category) {
-      filters.category = req.query.category
-    } else if (req.query.seller) {
-      filters.seller = req.query.seller
-    } else if (req.query.name) {
-      filters.name = req.query.name
+    if (req.body.categoryId && req.body.companyId) {
+      filters.categoryId = req.body.categoryId
+      filters.companyId = req.body.companyId
+    } else if (req.body.categoryId) {
+      filters.categoryId = req.body.categoryId
+    } else if (req.body.companyId) {
+      filters.companyId = req.body.companyId
+    } else if (req.body.name) {
+      filters.name = req.body.name
     }
 
     const { productsList, totalNumProducts } = await ProductsDAO.getProducts({

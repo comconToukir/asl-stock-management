@@ -6,18 +6,17 @@ import Home from "./components/Home/Home";
 import AddProduct from "./components/AddProduct/AddProduct";
 import Product from "./components/Product/Product";
 import ProductsList from "./components/ProductsList/ProductsList";
-import Category from "./components/Category/Category";
-import Company from "./components/Company/Company";
 import EditProduct from "./components/EditProduct/EditProduct";
 import Stock from "./components/Stock/Stock";
 import StockReport from "./components/StockReport/StockReport";
-import SalesReport from "./components/SalesReport/SalesReport";
+import StockIn from "./components/StockIn/StockIn";
 import AddCategory from "./components/Category/AddCategory/AddCategory";
 import AddCompany from "./components/Company/AddCompany/AddCompany";
 import CategoryList from "./components/Category/CategoryList/CategoryList";
 import EditCategory from "./components/Category/EditCategory/EditCategory";
 import CompanyList from "./components/Company/CompanyList/CompanyList";
 import EditCompany from "./components/Company/EditCompany/EditCompany";
+import ProductSummary from "./components/ProductSummary/ProductSummary";
 
 function App() {
   return (
@@ -31,7 +30,7 @@ function App() {
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav">
                 <li className="nav-item">
-                  <Link className="nav-link active" aria-current="page" to={"/products"}>Products</Link>
+                  <Link className="nav-link active" aria-current="page" to={"/items-summary"}>Items Summary</Link>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" to={"/categories"}>Categories</Link>
@@ -43,10 +42,10 @@ function App() {
                   <Link className="nav-link" to={"/add-product"}>Add product</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to={"/stock-report"}>Stock Report</Link>
+                  <Link className="nav-link" to={"/stock-in"}>Stock In</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to={"/sales-report"}>Sales Report</Link>
+                  <Link className="nav-link" to={"/stock-report"}>Stock Report</Link>
                 </li>
               </ul>
             </div>
@@ -56,7 +55,7 @@ function App() {
         <div className="container mt-3">
           <Routes>
             <Route exact path={"/"} element={<Home />} />
-            <Route path={"/products"} element={<ProductsList />} />
+            <Route path="/items-summary" element={<ProductSummary />} />
             <Route 
               path="/add-product"
               element={<AddProduct />}
@@ -86,8 +85,8 @@ function App() {
               element={<StockReport />}
             />
             <Route 
-              path="/sales-report"
-              element={<SalesReport />}
+              path="/stock-in"
+              element={<StockIn />}
             />
             <Route 
               path="/add-category"

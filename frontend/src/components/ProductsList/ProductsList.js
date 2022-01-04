@@ -8,29 +8,29 @@ const ProductsList = (props) => {
   const [searchName, setSearchName] = useState("");
   const [searchCategory, setSearchCategory] = useState("");
   const [searchSeller, setSearchSeller] = useState("");
-  const [categories, setCategories] = useState(["All Categories"]);
-  const [sellers, setSellers] = useState(["All Companies"]);
+  const [categories, setCategories] = useState([]);
+  const [sellers, setSellers] = useState([]);
 
   useEffect(() => {
     retrieveProducts();
-    retrieveCategories();
-    retrieveSellers();
+    // retrieveCategories();
+    // retrieveSellers();
   }, []);
   
-  const onChangeSearchName = e => {
+  const onChangeSearchName = (e) => {
     const searchName = e.target.value;
     setSearchName(searchName);
   }
 
-  const onChangeSearchCategory = e => {
-    const searchCategory = e.target.value;
-    setSearchCategory(searchCategory);
-  }
+  // const onChangeSearchCategory = (e) => {
+  //   const searchCategory = e.target.value;
+  //   setSearchCategory(searchCategory);
+  // }
   
-  const onChangeSearchSeller = e => {
-    const searchSeller = e.target.value;
-    setSearchSeller(searchSeller);
-  }
+  // const onChangeSearchSeller = (e) => {
+  //   const searchSeller = e.target.value;
+  //   setSearchSeller(searchSeller);
+  // }
   
   const retrieveProducts = () => {
     ProductDataService.getAll()
@@ -43,27 +43,27 @@ const ProductsList = (props) => {
       })
   };
 
-  const retrieveCategories = () => {
-    ProductDataService.getCategories()
-      .then(response => {
-        // console.log(response.data);
-        setCategories(["All Categories"].concat(response.data));
-      })
-      .catch(e => {
-        console.log(e)
-      });
-  };
+  // const retrieveCategories = () => {
+  //   ProductDataService.getCategories()
+  //     .then(response => {
+  //       // console.log(response.data);
+  //       setCategories(response.data);
+  //     })
+  //     .catch(e => {
+  //       console.log(e)
+  //     });
+  // };
 
-  const retrieveSellers = () => {
-    ProductDataService.getSellers()
-      .then(response => {
-        // console.log(response.data);
-        setSellers(["All Companies"].concat(response.data));
-      })
-      .catch(e => {
-        console.log(e)
-      });
-  };
+  // const retrieveSellers = () => {
+  //   ProductDataService.getSellers()
+  //     .then(response => {
+  //       // console.log(response.data);
+  //       setSellers(response.data);
+  //     })
+  //     .catch(e => {
+  //       console.log(e)
+  //     });
+  // };
 
   const refreshList = () => {
     retrieveProducts();
@@ -84,21 +84,21 @@ const ProductsList = (props) => {
     find(searchName, "name")
   };
 
-  const findByCategory = () => {
-    if (searchCategory === "All Categories") {
-      refreshList();
-    } else {
-    find(searchCategory, "category");
-    }
-  };
+  // const findByCategory = () => {
+  //   if (searchCategory === "All Categories") {
+  //     refreshList();
+  //   } else {
+  //   find(searchCategory, "category");
+  //   }
+  // };
 
-  const findBySeller = () => {
-    if (searchSeller === "All Companies") {
-      refreshList();
-    } else {
-      find(searchSeller, "seller");
-    }
-  }
+  // const findBySeller = () => {
+  //   if (searchSeller === "All Companies") {
+  //     refreshList();
+  //   } else {
+  //     find(searchSeller, "seller");
+  //   }
+  // }
 
   // const getProductStock = (productKey) => {
   //   ProductDataService.getStock(productKey)
@@ -133,50 +133,50 @@ const ProductsList = (props) => {
           </div>
         </div>
 
-        <div className='input-group w-50 col-lg-4 pb-1'>
+        {/* <div className='input-group w-50 col-lg-4 pb-1'>
           <input
             type="text"
             className='form-control'
             placeholder='Search By Category'
             value={searchCategory}
-            onChange={onChangeSearchCategory}
+            // onChange={onChangeSearchCategory}
           />
           <div className='input-group-append'>
             <button 
               className='btn btn-outline-secondary'
               type="button"
-              onClick={findByCategory}
+              // onClick={findByCategory}
             >
               Search
             </button>
           </div>
-        </div>
+        </div> */}
 
-        <div className='input-group w-50 col-lg-4 pb-1'>
+        {/* <div className='input-group w-50 col-lg-4 pb-1'>
           <input
             type="text"
             className='form-control'
             placeholder='Search By Company'
             value={searchSeller}
-            onChange={onChangeSearchSeller}
+            // onChange={onChangeSearchSeller}
           />
           <div className='input-group-append'>
             <button 
               className='btn btn-outline-secondary'
               type="button"
-              onClick={findBySeller}
+              // onClick={findBySeller}
             >
               Search
             </button>
           </div>
-        </div>
+        </div> */}
 
-        <div className="input-group w-50 col-lg-4 pb-1">
+        {/* <div className="input-group w-50 col-lg-4 pb-1">
           <select onChange={onChangeSearchCategory}>
             {
-              categories.map(category => {
+              categories.map(cat => {
                 return (
-                  <option value={category}> {category} </option>
+                  <option value={cat._id}> {cat.categoryName} </option>
               )
               })
             }
@@ -195,9 +195,9 @@ const ProductsList = (props) => {
         <div className="input-group w-50 col-lg-4 pb-1">
           <select onChange={onChangeSearchSeller}>
             {
-              sellers.map(seller => {
+              sellers.map(com => {
                 return (
-                  <option value={seller}> {seller} </option>
+                  <option value={com._id}> {com.companyName} </option>
               )
               })
             }
@@ -211,7 +211,7 @@ const ProductsList = (props) => {
               Search
             </button>
           </div>
-        </div>
+          </div> */}
       </div>
 
       <div className="row">
@@ -222,7 +222,6 @@ const ProductsList = (props) => {
               <th scope="col">Name</th>
               <th scope="col">Category</th>
               <th scope="col">Seller</th>
-              <th scope="col">Price</th>
               <th scope="col">Stock</th>
               <th scope="col"></th>
             </tr>
@@ -237,18 +236,16 @@ const ProductsList = (props) => {
                     <td>{product.name}</td>
                     <td>{product.category}</td>
                     <td>{product.seller}</td>
-                    <td>{product.price}</td>
                     <td>{product.stock}</td>
-                    {/* <td>{getProductStock(product.key)}</td> */}
                     <td>
-                    <Link to={`/product/${product.key}`} className="btn btn-primary">
+                    <Link to={`/product/${product._id}`} className="btn btn-primary">
                       View
                     </Link>
                     </td>
                     <td>
                     <Link 
                       className='btn btn-warning'
-                      to={"/product/"+product.key+"/edit"}
+                      to={"/product/"+product._id+"/edit"}
                       state= {product}
                       >
                         Edit

@@ -9,6 +9,11 @@ class ProductDataService {
     return http.get(`product/${key}`);
   }
 
+  getProducts(data) {
+    console.log(data)
+    return http.get('stock-in', data);
+  }
+
   find(query, by="name", page = 0) {
     return http.get(`?${by}=${query}&page=${page}`);
   }
@@ -24,8 +29,6 @@ class ProductDataService {
   deleteProduct(key) {
     return http.delete(`delete?key=${key}`);
   }
-
-  
   
   updateStock(data) {
     return http.post(`/stock`, data);
