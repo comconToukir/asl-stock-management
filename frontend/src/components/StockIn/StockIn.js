@@ -8,76 +8,86 @@ const StockIn = () => {
   const [changedName, setChangedName] = useState("");
   const [companyId, setCompanyId] = useState("");
   const [companies, setCompanies] = useState([]);
-  const [inputData, setInputData] = useState({});
+  const [ products, setProducts ] = useState([]);
+  const [ productId, setProductId ] = useState("");
+  const [ productName, setProductName ] = useState("");
   const [submitted, setSubmitted] = useState(false);
-  const [ inputCompany, getInputCompany ] = useState({});
+  const [ inputStock, setInputStock ] = useState(0);
+  // const [ inputCompany, getInputCompany ] = useState({});
   const [ inputProduct, getInputProduct ] = useState({});
-
-  useEffect(() => {
-    getInputCompany({
-      // name: changedName,
-      // categoryId: categoryId,
-      // companyId: companyId,
-      companyId: companyId,
-    });
-  }, [companyId]);
-
+  
   useEffect(() => {
     retrieveCompanies();
   }, []);
+
+  useEffect(() => {
+    getInputProduct({
+      productId: productId,
+      stockIn: inputStock
+    });
+  }, [productId, inputStock]);
   
-    const retrieveCompanies = () => {
-      ProductDataService.getCompanies()
-        .then((response) => {
-          console.log(response.data);
-          setCompanies(response.data);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    };
+  const retrieveCompanies = () => {
+    ProductDataService.getCompanies()
+      .then((response) => {
+        // console.log(response.data);
+        setCompanies(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
 
   const onChangeCompany = (e) => {
     console.log(e.target.value)
     const newCompany = e.target.value;
     setCompanyId(newCompany);
+    ProductDataService.getProducts({companyId: newCompany})
+      .then((response) => {
+        console.log(response.data);
+        setProducts(response.data.products);
+      })
+      .catch((e)=> {
+        console.log(e);
+      })
   };
 
-  // const createProduct = () => {
-  //   setInputData({
-  //     name: changedName,
-  //     categoryId: categoryId,
-  //     companyId: companyId,
-  //   });
-  //   ProductDataService.createProduct(inputData).then((response) => {
-  //     setSubmitted(true);
-  //   });
-  // };
-
-  const getProductsByCompany = () => {
-    console.log(inputCompany);
-    ProductDataService.getProducts(inputCompany)
-      .then((response)=> {
-        console.log(response.data)
-      })
+  const onChangeProduct = (e) => {
+    const newProduct = e.target.value;
+    setProductId(newProduct);
+    setProductName(e.target.selectedOptions[0].text);
   }
 
-  //TODO
+  const productStockIn = () => {
+    console.log(inputProduct);
+    ProductDataService.updateStock(inputProduct)
+    .then((response) => {
+      // console.log(response.data)
+      setSubmitted(true)
+    })
+    .catch((e)=> {
+      console.log(e);
+    })
+  }
 
-  // const getProducts = () => {
-  //   ProductDataService.getProducts()
-  //     .then((response) => {
-  //       console.log(response.data)
-  //     })
-  // }
+  const getStockFromInput = (e) => {
+    setInputStock(parseInt(e.target.value));
+  }
 
   return (
     <div>
       {submitted ? (
         <div>
           <h4>You submitted successfully!</h4>
-          <Link to={"/products"} className="btn btn-success">
-            Back to Products
+          <Link 
+            to={"/stock-in"} 
+            >
+            <button
+              onClick={()=>setSubmitted(!submitted)}
+              className="btn btn-success"
+            >
+                Back to Products
+            </button>
           </Link>
         </div>
       ) : (
@@ -97,31 +107,49 @@ const StockIn = () => {
                   <option value={com._id}>{com.companyName}</option>
                 ))}
               </select>
-              <button
-                className="btn btn-outline-secondary ms-2 flex-shrink-0"
-                onClick={getProductsByCompany}
-              >
-                Get Products
-              </button>
-              {/* <button onClick={()=>getProducts()}>Search</button> */}
             </div>
-            <div className="d-flex mt-2">
-              <strong>Items: </strong>
-              <input
-                type="text"
-                className="form-control ms-3 mb-3"
-                // value={changedName}
-                // onChange={onChangeName}
-                // required 
-              />
+
+            <div className="d-flex">
+              <strong>Item: </strong>
+              <select
+                className="form-select ms-3 mb-3"
+                value={productId}
+                onChange={onChangeProduct}
+                aria-label="Company select"
+                required
+              >
+                <option value="">Select Product</option>
+                {products.map((pd) => (
+                  <option value={pd._id}>{pd.name}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className="">
+              <div className="row mb-3">
+                <span class="col-12" id="basic-addon1">Name: {productName}</span>
+              </div>
+              <div className="row">
+                <div className="col-8">
+                  <input 
+                    type="number" 
+                    className="form-control w-100" 
+                    onChange={getStockFromInput}
+                    placeholder="Stock in amount" 
+                    aria-label="Stock in amount" 
+                    aria-describedby="basic-addon1"></input>
+                </div>
+                <div className="col-4">
+                  <button
+                    className="btn btn-outline-secondary w-100"
+                    onClick={productStockIn}
+                    >
+                    Stock In
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-          {/* <button
-            className="btn btn-success mb-3"
-            onClick={() => createProduct()}
-          >
-            Create Product
-          </button> */}
         </>
       )}
     </div>

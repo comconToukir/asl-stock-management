@@ -10,8 +10,7 @@ class ProductDataService {
   }
 
   getProducts(data) {
-    console.log(data)
-    return http.get('stock-in', data);
+    return http.post(`/`, data);
   }
 
   find(query, by="name", page = 0) {
