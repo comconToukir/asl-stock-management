@@ -95,7 +95,6 @@ export default class StockUpdateDAO {
       const stockDocument = {
         productId: ObjectId(productId),
         stockIn: stockIn,
-        // availableStock: availableStock,
         stock_update_date: d,
       }
 
@@ -106,16 +105,15 @@ export default class StockUpdateDAO {
     }
   }
 
-  static async updateStockOut(productId, stockOut, d) {
+  static async updateStockOut(inputStockOut) {
     try {
-      const stockDocument = {
-        productId: ObjectId(productId),
-        stockOut: stockOut,
-        // availableStock: availableStock,
-        stock_update_date: d,
-      }
+      const stockDocArray = inputStockOut.map((st) => {
+        st.productId = ObjectId(st.productId);
+        st.stock_update_date = new Date();
+        return st;
+      })
 
-      return await stocks.insertOne(stockDocument)
+      return await stocks.insertMany(stockDocArray)
     } catch (e) {
       console.error(`Unable to post stock: ${e}`)
       return { error: e }

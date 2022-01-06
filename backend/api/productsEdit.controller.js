@@ -51,7 +51,7 @@ export default class ProductsEditController {
   }
 
   static async apiUpdateStock(req, res, next) {
-    if (req.body.stockIn) {
+    // if (req.body.stockIn) {
       try {
         const productId = req.body.productId;
         const stockIn = req.body.stockIn;
@@ -66,21 +66,36 @@ export default class ProductsEditController {
       } catch (e) {
         res.status(500).json({ error: e.message })
       }
-    } else if (req.body.stockOut) {
-      try {
-        const productId = req.body.productId;
-        const stockOut = req.body.stockOut;
-        const d = new Date();
+    } 
+    // else if (req.body.stockOut) {
+      // try {
+      //   const productId = req.body.productId;
+      //   const stockOut = req.body.stockOut;
+      //   const d = new Date();
   
-        const StockResponse = await StockUpdateDAO.updateStockOut(
-          productId,
-          stockOut,
-          d,
-        )
-        res.json({ status: "success" })
-      } catch (e) {
-        res.status(500).json({ error: e.message })
-      }
+      //   const StockResponse = await StockUpdateDAO.updateStockOut(
+      //     productId,
+      //     stockOut,
+      //     d,
+      //   )
+      //   res.json({ status: "success" })
+      // } catch (e) {
+      //   res.status(500).json({ error: e.message })
+      // }
+    // }
+  // }
+
+  static async apiUpdateStockOut (req, res, next) {
+    console.log(req.body)
+    try {
+      const inputStockOut = req.body
+
+      const stockResponse = await StockUpdateDAO.updateStockOut(
+        inputStockOut
+      )
+      res.json({ status: "success" })
+    } catch (e) {
+      res.status(500).json({ error: e.message })
     }
   }
 

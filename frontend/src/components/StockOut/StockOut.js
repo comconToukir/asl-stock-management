@@ -8,13 +8,13 @@ const StockOut = () => {
   const [ products, setProducts ] = useState([]);
   const [ productId, setProductId ] = useState("");
   const [ productName, setProductName ] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [ submitted, setSubmitted ] = useState(false);
   const [ inputStockOut, setInputStockOut ] = useState(0);
   const [ availableStock, setAvailableStock ] = useState(0);
   const [ inputProduct, setInputProduct ] = useState({});
   const [ stockOutList, setStockOutList ] = useState([]);
-  const [activeIndex, setActiveIndex] = useState(null);
-  const [stockEditAmount, setStockEditAmount] = useState(0);
+  const [ activeIndex, setActiveIndex ] = useState(null);
+  const [ stockEditAmount, setStockEditAmount ] = useState(0);
   
   useEffect(() => {
     retrieveCompanies();
@@ -73,6 +73,8 @@ const StockOut = () => {
     if ( inputProduct.stockOut > availableStock.availableStock || inputProduct.stockOut <= 0) {
       alert("Invalid stock out quantity");
       return
+    } else if ( stockOutList.some((pd) => pd.productId === inputProduct.productId) ) {
+      alert("Item already exists in list");
     } else {
       setStockOutList([...stockOutList, inputProduct]);
       console.log(stockOutList);
@@ -87,15 +89,13 @@ const StockOut = () => {
       delete pd.productName;
       return pd;
     })
-    console.log(newList);
-    // ProductDataService.updateStock(inputProduct)
-    // .then((response) => {
-    //   console.log(response)
-    //   setSubmitted(true)
-    // })
-    // .catch((e)=> {
-    //   console.log(e);
-    // })
+    ProductDataService.updateStockOut(newList)
+      .then((response) => {
+        setSubmitted(!submitted);
+      })
+      .catch((e)=> {
+        console.log(e);
+      })
   }
 
   const getStockFromInput = (e) => {
@@ -128,12 +128,13 @@ const StockOut = () => {
   const refreshStock = () => {
     ProductDataService.getStockById({productId: productId})
       .then((response) => {
-      // console.log(response)
+      console.log(response)
       setAvailableStock(response.data[0])
     })
     .catch((e) => {
       console.log(e);
     })
+    setStockOutList([]);
     setSubmitted(!submitted);
   }
 
@@ -149,7 +150,7 @@ const StockOut = () => {
               onClick={()=>refreshStock()}
               className="btn btn-success"
             >
-              Back to Products
+              Back to Page
             </button>
           </Link>
         </div>

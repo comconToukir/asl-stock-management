@@ -32,6 +32,10 @@ class ProductDataService {
   updateStock(data) {
     return http.post(`/stock`, data);
   }
+
+  updateStockOut(data) {
+    return http.post(`/stock-out`, data);
+  }
   
   getStock(data) {
     return http.post(`/stock`, data);
