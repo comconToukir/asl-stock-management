@@ -34,7 +34,12 @@ class ProductDataService {
   }
   
   getStock(data) {
-    return http.get(`/stock`, data);
+    return http.post(`/stock`, data);
+  }
+
+  getStockById(data) {
+    console.log(data)
+    return http.post(`/stock-in`, data);
   }
   
   addCategory(data) {

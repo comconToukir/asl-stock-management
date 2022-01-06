@@ -10,6 +10,7 @@ import EditProduct from "./components/EditProduct/EditProduct";
 import Stock from "./components/Stock/Stock";
 import StockReport from "./components/StockReport/StockReport";
 import StockIn from "./components/StockIn/StockIn";
+import StockOut from "./components/StockOut/StockOut";
 import AddCategory from "./components/Category/AddCategory/AddCategory";
 import AddCompany from "./components/Company/AddCompany/AddCompany";
 import CategoryList from "./components/Category/CategoryList/CategoryList";
@@ -43,6 +44,9 @@ function App() {
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" to={"/stock-in"}>Stock In</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to={"/stock-out"}>Stock Out</Link>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" to={"/stock-report"}>Stock Report</Link>
@@ -87,6 +91,10 @@ function App() {
             <Route 
               path="/stock-in"
               element={<StockIn />}
+            />
+            <Route 
+              path="/stock-out"
+              element={<StockOut />}
             />
             <Route 
               path="/add-category"

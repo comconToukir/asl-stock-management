@@ -14,6 +14,35 @@ export default class StockUpdateDAO {
     }
   }
 
+  static async getStockById(productId) {
+    console.log(productId)
+    const pipeline = [
+      {$match: {"productId": ObjectId(productId)}},
+      {
+        $group: {
+          _id: ObjectId(productId),
+          totalStockIn: {$sum: "$stockIn"},
+          totalStockOut: {$sum: "$stockOut"}
+        }
+      },
+      {
+        $addFields: {
+          availableStock: {$subtract: ["$totalStockIn", "$totalStockOut"]}
+        }
+      }
+    ];
+
+    let cursor;
+    try {
+      cursor = await stocks.aggregate(pipeline).toArray()
+    } catch (e) {
+      console.error(`Unable to find command, ${e}`)
+      return {availableStock: []}
+    }
+
+    return cursor;
+  }
+
   static async getStocks({
     filters = null,
     page= 0,
@@ -34,16 +63,6 @@ export default class StockUpdateDAO {
           }
         }
       }
-      // } else if ("greaterThan" in filters && "lesserThan" in filters) {
-        // query = { $text: { $search: filters["date"] } } // working
-        // query = { "date": { $eq: filters["date"]}}
-        // query = {
-          // stock_update_date: {
-            // $gte: new Date(filters["greaterThan"]),
-            // $lt: new Date(filters["lesserThan"])
-          // }
-        // }
-      // }
     } 
 
     let cursor
@@ -76,14 +95,8 @@ export default class StockUpdateDAO {
       const stockDocument = {
         productId: ObjectId(productId),
         stockIn: stockIn,
-        stock_update_date: d,
-        // stockOut: stockOut,
         // availableStock: availableStock,
-        // minute: minute,
-        // hour: hour,
-        // date: date,
-        // month: month,
-        // year: year,
+        stock_update_date: d,
       }
 
       return await stocks.insertOne(stockDocument)
@@ -98,14 +111,8 @@ export default class StockUpdateDAO {
       const stockDocument = {
         productId: ObjectId(productId),
         stockOut: stockOut,
-        stock_update_date: d,
-        // stockOut: stockOut,
         // availableStock: availableStock,
-        // minute: minute,
-        // hour: hour,
-        // date: date,
-        // month: month,
-        // year: year,
+        stock_update_date: d,
       }
 
       return await stocks.insertOne(stockDocument)
