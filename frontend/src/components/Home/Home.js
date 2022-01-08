@@ -36,9 +36,12 @@ const Home = () => {
         console.log(e)
       });
 
+      let date = new Date();
+      date.setDate(date.getDate() + 1);
+
       const range = {
         greaterThan: new Date("1999-01-01").toISOString(),
-        lesserThan: new Date().toISOString()
+        lesserThan: date.toISOString()
       }
     ProductDataService.getStock(range)
       .then((res) => {
@@ -117,13 +120,13 @@ const Home = () => {
                   <td>{st.companyName}</td>
                   {st.stockOut &&
                     <>
-                      <td>Stock Out</td>
+                      <td>Sell</td>
                       <td>{st.stockOut}</td>
                     </>
                   } 
                   {st.stockIn &&
                     <>
-                      <td>Stock in</td>
+                      <td>Buy</td>
                       <td>{st.stockIn}</td>
                     </>
                   }

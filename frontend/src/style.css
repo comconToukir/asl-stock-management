@@ -1,0 +1,20 @@
+@media print{ 
+  /* navbar print css */
+    .navbar {
+     visibility: hidden!important;
+    } 
+  /* categories print css
+   */
+    .button-div{
+      visibility: hidden;
+    }
+
+    .button{
+      visibility: hidden;
+    }
+
+    #printableArea {
+      position: relative;
+      top: -150px;
+    }
+}

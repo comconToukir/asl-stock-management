@@ -84,14 +84,30 @@ const ProductSummary = () => {
   }
 
   const refreshStock = () => {
-    ProductDataService.getStockById({productId: productId})
+    ProductDataService.getProducts({companyId: companyId})
       .then((response) => {
-      // console.log(response.data)
-      setAvailableStock(response.data[0])
-    })
-    .catch((e) => {
-      console.log(e);
-    })
+        // console.log(response.data);
+        setProducts(response.data.products);
+      })
+      .catch((e)=> {
+        console.log(e);
+      })
+
+    // ProductDataService.getStockById({productId: productId})
+    //   .then((response) => {
+    //   // console.log(response.data)
+    //   setAvailableStock(response.data[0])
+    // })
+    // .catch((e) => {
+    //   console.log(e);
+    // })
+
+    // ProductDataService.get(productId)
+    // .then((response) => {
+    //   setProductName
+    // })
+    setProductName("");
+    setAvailableStock(0);
     setSubmitted(!submitted);
   }
 

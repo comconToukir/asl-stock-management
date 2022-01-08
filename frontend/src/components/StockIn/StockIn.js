@@ -52,17 +52,6 @@ const StockIn = () => {
       })
   };
 
-  // const getStockById = () => {
-  //   ProductDataService.getStockById({productId: productId})
-  //     .then((response) => {
-  //     // console.log(response)
-  //     setAvailableStock(response.data[0])
-  //   })
-  //   .catch((e) => {
-  //     console.log(e);
-  //   })
-  // }
-
   const onChangeProduct = (e) => {
     const newProduct = e.target.value;
     setProductId(newProduct);
@@ -83,14 +72,19 @@ const StockIn = () => {
 
   const productStockIn = () => {
     // console.log(inputProduct);
-    ProductDataService.updateStock(inputProduct)
-    .then((response) => {
-      // console.log(response.data)
-      setSubmitted(true)
-    })
-    .catch((e)=> {
-      console.log(e);
-    })
+    if (inputStock <= 1) {
+      alert("Invalid input amount");
+      return
+    } else {
+      ProductDataService.updateStock(inputProduct)
+      .then((response) => {
+        // console.log(response.data)
+        setSubmitted(true)
+      })
+      .catch((e)=> {
+        console.log(e);
+      })
+    }
   }
 
   const getStockFromInput = (e) => {
@@ -168,24 +162,52 @@ const StockIn = () => {
               </div>
             </div>
 
-            <div>
-              <div className="row mb-3">
-                <span className="col-12" id="basic-addon1">Name: {productName}</span>
+            {/* <div> */}
+            <div className="row g-1 mb-1">
+              <div className="col-md-3">
+                <strong>Name: </strong>
               </div>
-              <div className="row mb-3">
-                <span className="col-12" id="basic-addon2">Available Stock: {availableStock.availableStock}</span>
+              <div className="col-md-9">
+                <input
+                  type="text" 
+                  className="form-control" 
+                  placeholder={productName}
+                  disabled
+                ></input>
               </div>
-              <div className="row">
-                <div className="col-8">
+            </div>
+              {/* <div className="row mb-3">
+                <span className="col-12" id="basic-addon1"><strong>Name:</strong> {productName}</span>
+              </div> */}
+              {/* <div className="row mb-3">
+                <span className="col-12" id="basic-addon2"><strong>Available Stock:</strong> {availableStock.availableStock}</span>
+              </div> */}
+              <div className="row g-1 my-2">
+                <div className="col-md-3">
+                  <strong>Available Stock: </strong>
+                </div>
+                <div className="col-md-9">
+                  <input
+                    type="number" 
+                    className="form-control" 
+                    placeholder={availableStock.availableStock}
+                    disabled
+                    ></input>
+                </div>
+              </div>
+              <div className="col w-100 my-4">
+                <div className="row w-50 mx-auto mb-3">
                   <input 
                     type="number" 
                     className="form-control w-100" 
                     onChange={getStockFromInput}
-                    placeholder="Stock In Quantity" 
-                    aria-label="Stock In Quantity" 
+                    min="1"
+                    required
+                    placeholder="Buy Quantity" 
+                    aria-label="Buy Quantity" 
                     aria-describedby="basic-addon1"></input>
                 </div>
-                <div className="col-4">
+                <div className="row w-50 mx-auto mb-3">
                   <button
                     className="btn btn-outline-secondary w-100"
                     onClick={productStockIn}
@@ -194,7 +216,7 @@ const StockIn = () => {
                   </button>
                 </div>
               </div>
-            </div>
+            {/* </div> */}
           </div>
         </>
       )}

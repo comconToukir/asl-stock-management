@@ -23,27 +23,37 @@ const CompanyList = () => {
       });
   };
 
+  const printDiv = () => {
+    window.print();
+  } 
+
   return (
     <div className='container'>
-      <div className='d-flex'>
+      <div className='row w-25 mx-auto button-div'>
         <Link 
-          className='btn btn-outline-secondary w-25 mb-3 mx-auto'
+          className='btn btn-outline-secondary mb-3'
           to={"/add-company"}
           >
             Add Company
         </Link>
-      </div>
-      <div className='row'>
+      {/* </div>
+      <div className='row w-25 mx-auto'> */}
+          <button
+            // style={{width:"215px", margin:"7px"}}
+            className="btn btn-outline-secondary"
+            type="button"
+            onClick={printDiv}
+          >
+            Print Company List
+          </button>
+        </div>
+      <div className='row' id="printableArea">
       <table className="table table-striped table-hover">
           <thead>
             <tr>
               <th scope="col">#</th>
-              {/* <th scope="col">Name</th> */}
-              <th scope="col">Company</th>
-              {/* <th scope="col">Seller</th> */}
-              {/* <th scope="col">Price</th> */}
-              {/* <th scope="col">Stock</th> */}
-              {/* <th scope="col"></th> */}
+              <th scope="col" width="70%">Company</th>
+              <th></th>
             </tr>
           </thead>
 
@@ -53,34 +63,16 @@ const CompanyList = () => {
                 <>
                   <tr>
                     <th scope="row">{i+1}</th>
-                    <td>{company.companyName}</td>
+                    <td width="70%">{company.companyName}</td>
                     <td>
                     <Link 
                       to={`/company/${company._id}`} 
-                      className="btn btn-outline-primary"
+                      className="btn btn-outline-secondary"
                       state={company}
                       >
-                      Edit
+                      Update
                     </Link>
                     </td>
-                    {/* <td>{product.company}</td>
-                    <td>{product.seller}</td>
-                    <td>{product.price}</td>
-                    <td>{product.stock}</td> */}
-                    {/* <td>
-                    <Link to={`/product/${product.key}`} className="btn btn-primary">
-                      View
-                    </Link>
-                    </td>
-                    <td>
-                    <Link 
-                      className='btn btn-warning'
-                      to={"/product/"+product.key+"/edit"}
-                      state= {product}
-                      >
-                        Edit
-                    </Link>
-                    </td> */}
                   </tr>
                 </>
               );

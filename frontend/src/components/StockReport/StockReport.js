@@ -34,33 +34,31 @@ const StockReport = () => {
 
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
-  const printDiv = (divName) => {
-    const printContents = document.getElementById(divName).innerHTML;
-    const originalContents = document.body.innerHTML;
-    document.body.innerHTML = printContents;
+  const printDiv = () => {
     window.print();
-    document.body.innerHTML = originalContents;
   } 
 
   return (
     <div className="container">
-      <div className="col">
-        <div className='row w-25 mx-auto'>
-          <div>
-          <DatePicker 
-            selectsRange={true}
-            startDate={startDate}
-            endDate={endDate}
-            onChange={(update) => {
-              setDateRange(update);
-            }}
-            // isClearable={true}
-            />
+      <div className="col button-div">
+        <div className='row my-2'>
+          <div className="col-3 col-sm-3 ms-auto"> {/*todo*/}
+            <span >Set Date Range: </span>
+          </div>
+          <div className='col-3 me-auto'>
+            <DatePicker 
+              selectsRange={true}
+              startDate={startDate}
+              endDate={endDate}
+              onChange={(update) => {
+                setDateRange(update);
+              }}
+              // isClearable={true}
+              />
           </div>
         </div>
-        <div className='row w-25 mx-auto'>
+        <div className='row w-50 mx-auto'>
           <button
-            // style={{width:"215px", margin:"7px"}}
             className="btn btn-outline-secondary m-2"
             type="button"
             onClick={getStockByRange}
@@ -68,12 +66,12 @@ const StockReport = () => {
             Get stock report
           </button>
         </div>
-        <div className='row w-25 mx-auto'>
+        <div className='row w-50 mx-auto'>
           <button
             // style={{width:"215px", margin:"7px"}}
             className="btn btn-outline-secondary m-2"
             type="button"
-            onClick={()=>printDiv("printableArea")}
+            onClick={printDiv}
           >
             Print stock report
           </button>
@@ -104,13 +102,13 @@ const StockReport = () => {
                   <td>{st.companyName}</td>
                   {st.stockOut &&
                     <>
-                      <td>Stock Out</td>
+                      <td>Sell</td>
                       <td>{st.stockOut}</td>
                     </>
                   } 
                   {st.stockIn &&
                     <>
-                      <td>Stock in</td>
+                      <td>Buy</td>
                       <td>{st.stockIn}</td>
                     </>
                   }

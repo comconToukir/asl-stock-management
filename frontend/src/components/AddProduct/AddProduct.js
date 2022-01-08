@@ -84,44 +84,57 @@ const AddProduct = () => {
         </div>
       ) : (
         <>
-          <div className="input-group d-flex flex-column pb-1">
-            <div className="d-flex">
-              <strong>Category: </strong>
-              <select
-                className="form-select ms-3 mb-3"
-                value={categoryId}
-                onChange={(e) => onChangeCategory(e)}
-                aria-label="Category select"
-                required
-              >
-                <option value="">Select Category</option>
-                {categories.map((cat) => <option value={cat._id}>{cat.categoryName}</option>)}
-              </select>
+        {/* TODO */}
+          <div className="input-group d-grid pb-1">
+            <div className="row">
+              <div className="col-3">
+                <strong>Category: </strong>
+              </div>
+              <div  className="col-9">
+                <select
+                  className="form-select ms-3 mb-3"
+                  value={categoryId}
+                  onChange={(e) => onChangeCategory(e)}
+                  aria-label="Category select"
+                  required
+                  >
+                  <option value="">Select Category</option>
+                  {categories.map((cat) => <option value={cat._id}>{cat.categoryName}</option>)}
+                </select>
+              </div>
             </div>
-            <div className="d-flex">
-              <strong>Company: </strong>
-              <select
-                className="form-select ms-3 mb-3"
-                value={companyId}
-                onChange={onChangeCompany}
-                aria-label="Company select"
-                required
-              >
-                <option value="">Select Company</option>
-                {companies.map((com) => (
-                  <option value={com._id}>{com.companyName}</option>
-                ))}
-              </select>
+            <div className="row">
+              <div  className="col-3">
+                <strong>Company: </strong>
+              </div>
+              <div  className="col-9">
+                <select
+                  className="form-select ms-3 mb-3"
+                  value={companyId}
+                  onChange={onChangeCompany}
+                  aria-label="Company select"
+                  required
+                  >
+                  <option value="">Select Company</option>
+                  {companies.map((com) => (
+                    <option value={com._id}>{com.companyName}</option>
+                    ))}
+                </select>
+              </div>
             </div>
-            <div className="d-flex">
-              <strong>Name: </strong>
-              <input
-                type="text"
-                className="form-control ms-3 mb-3"
-                value={changedName}
-                onChange={onChangeName}
-                required
-              />
+            <div className="row">
+              <div className="col-3">
+                <strong>Name: </strong>
+              </div>
+              <div className="col-9">
+                <input
+                  type="text"
+                  className="form-control ms-3 mb-3"
+                  value={changedName}
+                  onChange={onChangeName}
+                  required
+                  />
+              </div>
             </div>
           </div>
           <button

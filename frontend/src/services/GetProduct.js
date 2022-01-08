@@ -5,8 +5,8 @@ class ProductDataService {
     return http.get(`?page=${page}`);
   }
 
-  get(key) {
-    return http.get(`product/${key}`);
+  get(id) {
+    return http.get(`product/${id}`);
   }
 
   getProducts(data) {

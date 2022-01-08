@@ -69,7 +69,7 @@ const StockOut = () => {
   }
 
   const addToList = () => {
-    console.log(inputProduct)
+    // console.log(inputProduct)
     if ( inputProduct.stockOut > availableStock.availableStock || inputProduct.stockOut <= 0) {
       alert("Invalid stock out quantity");
       return
@@ -77,7 +77,7 @@ const StockOut = () => {
       alert("Item already exists in list");
     } else {
       setStockOutList([...stockOutList, inputProduct]);
-      console.log(stockOutList);
+      // console.log(stockOutList);
     }
   }
 
@@ -122,7 +122,7 @@ const StockOut = () => {
       }
     })
     setStockOutList(newList);
-    console.log(stockOutList);
+    // console.log(stockOutList);
   }
 
   const refreshStock = () => {
@@ -209,6 +209,8 @@ const StockOut = () => {
                   <input 
                     type="number" 
                     className="form-control w-100" 
+                    min="1"
+                    required
                     onChange={getStockFromInput}
                     placeholder="Stock Out Quantity" 
                     aria-label="Stock Out Quantity" 
@@ -288,12 +290,12 @@ const StockOut = () => {
               </tbody>
             </table>
           </div>
-          <div>
+          <div className="w-100">
             <button
-              className="btn btn-outline-secondary"
+              className="btn btn-outline-secondary mx-auto"
               onClick={()=>productStockOut()}
             >
-              Update DataBase
+              Confirm Stock Out List
             </button>
           </div>
         </>

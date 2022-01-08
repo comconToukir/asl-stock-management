@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
-
+import '../src/style.css';
 import Home from "./components/Home/Home";
 import AddProduct from "./components/AddProduct/AddProduct";
 import Product from "./components/Product/Product";
@@ -18,15 +18,21 @@ import EditCompany from "./components/Company/EditCompany/EditCompany";
 import ProductSummary from "./components/ProductSummary/ProductSummary";
 
 function App() {
+  const [ isNavCollapsed, setIsNavCollapsed ] = useState(true);
+  const handleNavCollapse = () => {
+    setIsNavCollapsed(!isNavCollapsed);
+  }
+  
   return (
     <div>
         <nav className="navbar navbar-expand-md sticky-top navbar-dark bg-dark">
           <div className="container">
             <a className="navbar-brand" href="/">Home</a>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            {/* <button className="navbar-toggler" type="button" onclick={()=>setIsNavCollapsed(!isNavCollapsed)} data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> */}
+            <button className="navbar-toggler" type="button" onClick={()=>handleNavCollapse()}>
               <span className="navbar-toggler-icon"></span>
             </button>
-            <div className="collapse navbar-collapse" id="navbarNav">
+            <div className={`${ isNavCollapsed ? 'collapse': ''} navbar-collapse`} id="navbarNav">
               <ul className="navbar-nav">
                 <li className="nav-item active">
                   <Link className="nav-link" aria-current="page" to={"/items-summary"}>Items Summary</Link>
