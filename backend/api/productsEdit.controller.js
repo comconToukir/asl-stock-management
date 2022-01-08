@@ -4,6 +4,7 @@ import StockUpdateDAO from "../dao/stockUpdateDAO.js"
 export default class ProductsEditController {
 
   static async apiGetStocks(req, res, next) {
+    console.log(req.body)
     try {
       const productsPerPage = req.query.productsPerPage ? parseInt(req.query.productsPerPage, 10) : 20
       const page = req.query.page ? parseInt(req.query.page, 10) : 0
@@ -12,8 +13,8 @@ export default class ProductsEditController {
       if (req.body.key) {
         filters.key = req.body.key
       } else if (req.body.greaterThan && req.body.lesserThan) {
-        filters.greaterThan = req.body.greaterThan
-        filters.lesserThan = req.body.lesserThan
+        filters.greaterThan = req.body.greaterThan.substr(0, 10)
+        filters.lesserThan = req.body.lesserThan.substr(0, 10)
       }
       
       const { productsList, totalNumProducts } = await StockUpdateDAO.getStocks({
@@ -122,15 +123,15 @@ export default class ProductsEditController {
     try {
       const productId = req.body.productId
       const name = req.body.name
-      const categoryId = req.body.categoryId
-      const companyId = req.body.companyId
+      // const categoryId = req.body.categoryId
+      // const companyId = req.body.companyId
       const date = new Date()
 
       const editResponse = await ProductsEditDAO.updateProduct(
         productId,
         name,
-        categoryId,
-        companyId,
+        // categoryId,
+        // companyId,
         date,
       )
 

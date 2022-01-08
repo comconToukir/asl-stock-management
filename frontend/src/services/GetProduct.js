@@ -38,7 +38,7 @@ class ProductDataService {
   }
   
   getStock(data) {
-    return http.post(`/stock`, data);
+    return http.post(`/stock-report`, data)
   }
 
   getStockById(data) {

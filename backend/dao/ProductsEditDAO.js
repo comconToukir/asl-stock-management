@@ -1,4 +1,4 @@
-import mongodb from "mongodb";
+import mongodb, { ObjectID } from "mongodb";
 const ObjectId = mongodb.ObjectId
 
 let products
@@ -39,7 +39,7 @@ export default class ProductsEditDAO {
         // stock: stock,
         // remark: remark,
         // img: img,
-        added_on: date,
+        // added_on: date,
       }
 
       return await products.insertOne(newProduct)
@@ -50,30 +50,17 @@ export default class ProductsEditDAO {
   }
 
   static async updateProduct(
-    key,
-    // user_id,
+    productId,
     name,
-    category,
-    seller,
-    price,
-    stock,
-    remark,
-    img,
-    date
+    // date
     ) {
       try {
         const updateResponse = await products.updateOne(
           // { user_id: user_id, key: key},
-          { key: key},
+          { _id: ObjectId(productId)},
           { $set: {
             name: name,
-            category: category,
-            seller: seller,
-            price: price,
-            stock: stock,
-            remark: remark,
-            img: img,
-            modified_on: date,
+            // modified_on: date,
           }},
         )
         return updateResponse
