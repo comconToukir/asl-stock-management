@@ -8,7 +8,7 @@ const EditCompany = () => {
   const [ inputCompany, setInputCompany ] = useState("");
   const [ inputData, setInputData ] = useState({});
   const [ submitted, setSubmitted ] = useState(false);
-  const [ companyId, setCompanyId ] = useState(location.state._id);
+  // const [ companyId, setCompanyId ] = useState(location.state._id);
 
   useEffect(() => {
     setInputData({
@@ -34,17 +34,8 @@ const EditCompany = () => {
       companyId: location.state._id,
       companyName: inputCompany,
     });
-    // console.log(inputData);
     ProductDataService.editCompany(inputData)
     .then(response=>{
-      setSubmitted(true);
-    });
-  }
-
-  const deleteCompany = () => {
-    console.log(inputData)
-    ProductDataService.deleteCompany(inputData)
-    .then(response => {
       setSubmitted(true);
     });
   }
@@ -61,10 +52,7 @@ const EditCompany = () => {
         ) : (
         <>
           <div className='input-group d-flex pb-1'>
-            <div className="d-flex w-100 justify-content-center mb-3">
-              <strong>ID: </strong> <span className="ms-2">{location.state._id}</span>
-            </div>
-            <div className="d-flex w-100  justify-content-around">
+            <div className="d-flex w-100 justify-content-around">
               <strong>Company: </strong>
               <input
                 type="text"
@@ -74,17 +62,11 @@ const EditCompany = () => {
                 required
                 />
               <button 
-                className='btn btn-success'
+                className='btn btn-outline-secondary'
                 onClick={()=>editCompany()}
               >
-                Edit
+                Update
               </button>
-              {/* <button 
-                className='btn btn-danger'
-                onClick={()=>deleteCompany()}
-              >
-                Delete
-              </button> */}
             </div>
           </div>
         </>

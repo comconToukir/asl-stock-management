@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import '../src/style.css';
+import './App.css'
 import Home from "./components/Home/Home";
 import AddProduct from "./components/AddProduct/AddProduct";
 import Product from "./components/Product/Product";
@@ -24,7 +25,7 @@ function App() {
   }
   
   return (
-    <div>
+    <div className="main-div">
         <nav className="navbar navbar-expand-md sticky-top navbar-dark bg-dark">
           <div className="container">
             <a className="navbar-brand" href="/">Home</a>

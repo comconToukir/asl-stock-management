@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ProductDataService from "../../services/GetProduct"
@@ -12,14 +12,12 @@ const StockReport = () => {
   const [postsPerPage] = useState(20);
 
   const getStockByRange = () => {
-    // console.log(startDate, endDate);
     const range = {
       greaterThan: startDate.toISOString(),
       lesserThan: endDate.toISOString()
     }
     ProductDataService.getStock(range)
       .then((response) => {
-        console.log(response)
         setStockList(response.data.products);
       })
       .catch((e) => {
@@ -42,7 +40,7 @@ const StockReport = () => {
     <div className="container">
       <div className="col button-div">
         <div className='row my-2'>
-          <div className="col-3 col-sm-3 ms-auto"> {/*todo*/}
+          <div className="col-3 col-sm-3 ms-auto">
             <span >Set Date Range: </span>
           </div>
           <div className='col-3 me-auto'>
@@ -122,7 +120,9 @@ const StockReport = () => {
           </tbody>
         </table>
       </div>
-      <Pagination postsPerPage={postsPerPage} totalPosts={stockList.length} paginate={paginate}></Pagination>
+      <div className='button-div d-flex justify-content-center'>
+        <Pagination postsPerPage={postsPerPage} totalPosts={stockList.length} paginate={paginate}></Pagination>
+      </div>
       </div>
   );
 };

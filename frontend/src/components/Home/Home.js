@@ -56,43 +56,39 @@ const Home = () => {
   return (
     <>
       <div className='row justify-content-around g-5'>
-        <div className="card" style={{width: "18rem", padding: "0px"}}>
+        <div className="card" style={{width: "16rem", padding: "0px"}}>
           <div className="card-header">
             Categories
           </div>
-          <ul className="list-group list-group-flush" style={{ height: "204px", overflow: "auto", overflowX: "hidden"}}>
-            {
-              categoryList.map((cat) => {
-                return <li className="list-group-item">{cat.categoryName}</li>
-              })
-            }
-          </ul>
+          <div className='card-body d-grid text-center'>
+            <span style={{fontSize: "7rem"}}>
+              {categoryList.length}
+            </span>
+          </div>
         </div>
 
-        <div className="card" style={{width: "18rem", padding: "0px"}}>
+        <div className="card" style={{width: "16rem", padding: "0px"}}>
           <div className="card-header">
             Companies
           </div>
-          <ul className="list-group list-group-flush" style={{ height: "204px", overflow: "auto", overflowX: "hidden"}}>
-            {
-              companyList.map((com) => {
-                return <li className="list-group-item">{com.companyName}</li>
-              })
-            }
-          </ul>
+          <div className='card-body d-grid text-center'>
+              <span style={{fontSize: "7rem"}}>
+                {companyList.length}
+              </span>
+          </div>
         </div>
 
-        <div className="card" style={{width: "18rem", padding: "0px"}}>
+        <div className="card" style={{width: "16rem", padding: "0px"}}>
           <div className="card-header">
             Items
           </div>
-          <ul className="list-group list-group-flush" style={{ height: "204px", overflow: "auto", overflowX: "hidden"}}>
-            { itemList.products &&
-              itemList.products.map((it) => {
-                return <li className="list-group-item">{it.name}</li>
-              })
+          <div className='card-body d-grid text-center'>
+            {itemList.products && 
+              <span style={{fontSize: "7rem"}}>
+                {itemList.products.length}
+              </span>
             }
-          </ul>
+          </div>
         </div>
       </div>
 
@@ -111,7 +107,7 @@ const Home = () => {
           </thead>
           <tbody>
             { stockList.products &&
-              stockList.products.slice(0, 5).map((st, i)=> {
+              stockList.products.map((st, i)=> {
                 return <>
                 <tr>
                 <td>{i+1}</td>

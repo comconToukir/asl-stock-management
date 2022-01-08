@@ -6,17 +6,13 @@ const CompanyList = () => {
   const [companies, setCompanies] = useState([]);
 
   useEffect(() => {
-    // retrieveProducts();
     retrieveCompanies();
-    // retrieveSellers();
   }, []);
 
   const retrieveCompanies = () => {
     ProductDataService.getCompanies()
       .then(response => {
-        console.log(response.data);
         setCompanies(response.data);
-        // setCompanies(["All Companies"].concat(response.data));
       })
       .catch(e => {
         console.log(e)
@@ -36,10 +32,7 @@ const CompanyList = () => {
           >
             Add Company
         </Link>
-      {/* </div>
-      <div className='row w-25 mx-auto'> */}
           <button
-            // style={{width:"215px", margin:"7px"}}
             className="btn btn-outline-secondary"
             type="button"
             onClick={printDiv}
@@ -67,7 +60,7 @@ const CompanyList = () => {
                     <td>
                     <Link 
                       to={`/company/${company._id}`} 
-                      className="btn btn-outline-secondary"
+                      className="btn btn-outline-secondary button-div"
                       state={company}
                       >
                       Update

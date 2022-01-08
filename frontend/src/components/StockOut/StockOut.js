@@ -32,7 +32,6 @@ const StockOut = () => {
   const retrieveCompanies = () => {
     ProductDataService.getCompanies()
       .then((response) => {
-        // console.log(response.data);
         setCompanies(response.data);
       })
       .catch((e) => {
@@ -60,7 +59,6 @@ const StockOut = () => {
     setProductName(e.target.selectedOptions[0].text);
     ProductDataService.getStockById({productId: e.target.value})
       .then((response) => {
-      // console.log(response)
       setAvailableStock(response.data[0])
     })
     .catch((e) => {
@@ -69,7 +67,6 @@ const StockOut = () => {
   }
 
   const addToList = () => {
-    // console.log(inputProduct)
     if ( inputProduct.stockOut > availableStock.availableStock || inputProduct.stockOut <= 0) {
       alert("Invalid stock out quantity");
       return
@@ -77,13 +74,10 @@ const StockOut = () => {
       alert("Item already exists in list");
     } else {
       setStockOutList([...stockOutList, inputProduct]);
-      // console.log(stockOutList);
     }
   }
 
-  /////////////////////////////
   const productStockOut = () => {
-    console.log(stockOutList);
     const newList = stockOutList.map((pd) => {
       delete pd.availableStock;
       delete pd.productName;
@@ -107,7 +101,6 @@ const StockOut = () => {
   }
 
   const insertInputInList = (i) => {
-    console.log(stockEditAmount);
     const newList = stockOutList.map((item, j) => {
       if (j === i) {
         if (stockEditAmount > item.availableStock || stockEditAmount <= 0) {
@@ -122,7 +115,6 @@ const StockOut = () => {
       }
     })
     setStockOutList(newList);
-    // console.log(stockOutList);
   }
 
   const refreshStock = () => {
@@ -198,36 +190,57 @@ const StockOut = () => {
             </div>
 
             <div>
-              <div className="row mb-3">
-                <span className="col-12" id="basic-addon1">Name: {productName}</span>
+            <div className="row g-1 mb-1">
+              <div className="col-md-3">
+                <strong>Name: </strong>
               </div>
-              <div className="row mb-3">
-                <span className="col-12" id="basic-addon2">Available Stock: {availableStock.availableStock}</span>
+              <div className="col-md-9">
+                <input
+                  type="text" 
+                  className="form-control" 
+                  placeholder={productName}
+                  disabled
+                ></input>
               </div>
-              <div className="row">
-                <div className="col-8">
+            </div>
+            <div className="row g-1 my-2">
+                <div className="col-md-3">
+                  <strong>Available Stock: </strong>
+                </div>
+                <div className="col-md-9">
+                  <input
+                    type="number" 
+                    className="form-control" 
+                    placeholder={availableStock.availableStock}
+                    disabled
+                    ></input>
+                </div>
+              </div>
+
+              <div className="col w-100 my-4">
+                <div className="row w-50 mx-auto mb-3">
                   <input 
                     type="number" 
                     className="form-control w-100" 
+                    onChange={getStockFromInput}
                     min="1"
                     required
-                    onChange={getStockFromInput}
-                    placeholder="Stock Out Quantity" 
-                    aria-label="Stock Out Quantity" 
+                    placeholder="Sell Quantity" 
+                    aria-label="Sell Quantity" 
                     aria-describedby="basic-addon1"></input>
                 </div>
-                <div className="col-4">
+                <div className="row w-50 mx-auto mb-3">
                   <button
-                      className="btn btn-outline-secondary w-100"
-                      onClick={addToList}
-                      >
-                      Add to list
-                    </button>
+                    className="btn btn-outline-secondary w-100"
+                    onClick={addToList}
+                    >
+                    Add to list
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-          <div className="row">
+          <div className="row" id="printableStockOut">
             <table className="table table-striped table-hover">
               <thead>
                 <tr>
@@ -258,7 +271,6 @@ const StockOut = () => {
                               onChange={(e)=>editStockInput(e)}
                               />
                               <button
-                                // id={"btn"+(i+1)}
                                 className="btn btn-sm btn-outline-secondary secondary"
                                 onClick={()=>{
                                   if (activeIndex) {

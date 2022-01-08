@@ -162,7 +162,6 @@ const StockIn = () => {
               </div>
             </div>
 
-            {/* <div> */}
             <div className="row g-1 mb-1">
               <div className="col-md-3">
                 <strong>Name: </strong>
@@ -176,12 +175,6 @@ const StockIn = () => {
                 ></input>
               </div>
             </div>
-              {/* <div className="row mb-3">
-                <span className="col-12" id="basic-addon1"><strong>Name:</strong> {productName}</span>
-              </div> */}
-              {/* <div className="row mb-3">
-                <span className="col-12" id="basic-addon2"><strong>Available Stock:</strong> {availableStock.availableStock}</span>
-              </div> */}
               <div className="row g-1 my-2">
                 <div className="col-md-3">
                   <strong>Available Stock: </strong>
@@ -216,7 +209,6 @@ const StockIn = () => {
                   </button>
                 </div>
               </div>
-            {/* </div> */}
           </div>
         </>
       )}

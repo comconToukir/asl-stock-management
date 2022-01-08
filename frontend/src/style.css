@@ -9,10 +9,6 @@
       visibility: hidden;
     }
 
-    .button{
-      visibility: hidden;
-    }
-
     #printableArea {
       position: relative;
       top: -150px;

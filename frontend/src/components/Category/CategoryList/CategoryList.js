@@ -63,7 +63,7 @@ const CategoryList = () => {
                     <td>
                       <Link
                         to={`/category/${category._id}`}
-                        className="btn btn-outline-secondary"
+                        className="btn btn-outline-secondary button-div"
                         state={category}
                       >
                         Update

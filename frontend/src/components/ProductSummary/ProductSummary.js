@@ -27,7 +27,6 @@ const ProductSummary = () => {
   const retrieveCompanies = () => {
     ProductDataService.getCompanies()
       .then((response) => {
-        // console.log(response.data);
         setCompanies(response.data);
       })
       .catch((e) => {
@@ -36,12 +35,10 @@ const ProductSummary = () => {
   };
 
   const onChangeCompany = (e) => {
-    // console.log(e.target.value)
     const newCompany = e.target.value;
     setCompanyId(newCompany);
     ProductDataService.getProducts({companyId: newCompany})
       .then((response) => {
-        // console.log(response.data);
         setProducts(response.data.products);
       })
       .catch((e)=> {
@@ -68,10 +65,8 @@ const ProductSummary = () => {
   }
 
   const productEditName = () => {
-    // console.log(inputProduct);
     ProductDataService.updateProduct(inputProduct)
     .then((response) => {
-      // console.log(response.data)
       setSubmitted(true)
     })
     .catch((e)=> {
@@ -86,26 +81,11 @@ const ProductSummary = () => {
   const refreshStock = () => {
     ProductDataService.getProducts({companyId: companyId})
       .then((response) => {
-        // console.log(response.data);
         setProducts(response.data.products);
       })
       .catch((e)=> {
         console.log(e);
       })
-
-    // ProductDataService.getStockById({productId: productId})
-    //   .then((response) => {
-    //   // console.log(response.data)
-    //   setAvailableStock(response.data[0])
-    // })
-    // .catch((e) => {
-    //   console.log(e);
-    // })
-
-    // ProductDataService.get(productId)
-    // .then((response) => {
-    //   setProductName
-    // })
     setProductName("");
     setAvailableStock(0);
     setSubmitted(!submitted);
@@ -171,14 +151,34 @@ const ProductSummary = () => {
             </div>
 
             <div>
-              <div className="row mb-3">
-                <span className="col-12" id="basic-addon1">Name: {productName}</span>
+            <div className="row g-1 mb-1">
+              <div className="col-md-3">
+                <strong>Name: </strong>
               </div>
-              <div className="row mb-3">
-                <span className="col-12" id="basic-addon2">Available Stock: {availableStock.availableStock}</span>
+              <div className="col-md-9">
+                <input
+                  type="text" 
+                  className="form-control" 
+                  placeholder={productName}
+                  disabled
+                ></input>
               </div>
-              <div className="row">
-                <div className="col-8">
+            </div>
+              <div className="row g-1 my-2">
+                <div className="col-md-3">
+                  <strong>Available Stock: </strong>
+                </div>
+                <div className="col-md-9">
+                  <input
+                    type="number" 
+                    className="form-control" 
+                    placeholder={availableStock.availableStock}
+                    disabled
+                    ></input>
+                </div>
+              </div>
+              <div className="col w-100 my-4">
+                <div className="row w-50 mx-auto mb-3">
                   <input 
                     type="text" 
                     className="form-control w-100" 
@@ -187,12 +187,12 @@ const ProductSummary = () => {
                     aria-label="Input Edit Name" 
                     aria-describedby="basic-addon1"></input>
                 </div>
-                <div className="col-4">
+                <div className="row w-50 mx-auto mb-3">
                   <button
                     className="btn btn-outline-secondary w-100"
                     onClick={productEditName}
                     >
-                    Edit Name
+                    Submit
                   </button>
                 </div>
               </div>

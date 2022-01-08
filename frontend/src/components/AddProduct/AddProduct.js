@@ -32,7 +32,6 @@ const AddProduct = () => {
   };
   const onChangeCategory = (e) => {
     const newCategory = e.target.value;
-    // console.log(e.target.value);
     setCategoryId(newCategory);
   };
   const onChangeCompany = (e) => {
@@ -65,7 +64,6 @@ const AddProduct = () => {
   const retrieveCompanies = () => {
     ProductDataService.getCompanies()
       .then((response) => {
-        console.log(response.data);
         setCompanies(response.data);
       })
       .catch((e) => {
@@ -78,21 +76,20 @@ const AddProduct = () => {
       {submitted ? (
         <div>
           <h4>You submitted successfully!</h4>
-          <Link to={"/products"} className="btn btn-success">
+          <Link to={"/add-product"} className="btn btn-success">
             Back to Products
           </Link>
         </div>
       ) : (
         <>
-        {/* TODO */}
-          <div className="input-group d-grid pb-1">
-            <div className="row">
-              <div className="col-3">
+          <div className="input-group d-flex flex-column pb-1">
+          <div className="row g-1">
+              <div className="col-md-3">
                 <strong>Category: </strong>
               </div>
-              <div  className="col-9">
+              <div className="col-md-9">
                 <select
-                  className="form-select ms-3 mb-3"
+                  className="form-select mb-3"
                   value={categoryId}
                   onChange={(e) => onChangeCategory(e)}
                   aria-label="Category select"
@@ -103,13 +100,14 @@ const AddProduct = () => {
                 </select>
               </div>
             </div>
-            <div className="row">
-              <div  className="col-3">
+
+            <div className="row g-1">
+              <div className="col-md-3">
                 <strong>Company: </strong>
               </div>
-              <div  className="col-9">
+              <div  className="col-md-9">
                 <select
-                  className="form-select ms-3 mb-3"
+                  className="form-select mb-3"
                   value={companyId}
                   onChange={onChangeCompany}
                   aria-label="Company select"
@@ -122,14 +120,15 @@ const AddProduct = () => {
                 </select>
               </div>
             </div>
-            <div className="row">
-              <div className="col-3">
+
+            <div className="row g-1">
+              <div className="col-md-3">
                 <strong>Name: </strong>
               </div>
-              <div className="col-9">
+              <div className="col-md-9">
                 <input
                   type="text"
-                  className="form-control ms-3 mb-3"
+                  className="form-control mb-3"
                   value={changedName}
                   onChange={onChangeName}
                   required
@@ -138,7 +137,7 @@ const AddProduct = () => {
             </div>
           </div>
           <button
-            className="btn btn-success mb-3"
+            className="btn btn-outline-secondary mb-3"
             onClick={() => createProduct()}
           >
             Create Product

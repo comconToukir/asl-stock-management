@@ -8,7 +8,6 @@ const EditCategory = () => {
   const [ inputCategory, setInputCategory ] = useState("");
   const [ inputData, setInputData ] = useState({});
   const [ submitted, setSubmitted ] = useState(false);
-  const [ categoryId, setCategoryId ] = useState(location.state._id);
 
   useEffect(() => {
     setInputData({
@@ -34,17 +33,8 @@ const EditCategory = () => {
       categoryId: location.state._id,
       categoryName: inputCategory,
     });
-    // console.log(inputData);
     ProductDataService.editCategory(inputData)
     .then(response=>{
-      setSubmitted(true);
-    });
-  }
-
-  const deleteCategory = () => {
-    console.log(inputData)
-    ProductDataService.deleteCategory(inputData)
-    .then(response => {
       setSubmitted(true);
     });
   }
@@ -61,9 +51,6 @@ const EditCategory = () => {
         ) : (
         <>
           <div className='input-group d-flex pb-1'>
-            <div className="d-flex w-100 justify-content-center mb-3">
-              <strong>ID: </strong> <span className="ms-2">{location.state._id}</span>
-            </div>
             <div className="d-flex w-100  justify-content-around">
               <strong>Category: </strong>
               <input
@@ -77,14 +64,8 @@ const EditCategory = () => {
                 className='btn btn-success'
                 onClick={()=>editCategory()}
               >
-                Edit
+                Update
               </button>
-              {/* <button 
-                className='btn btn-danger'
-                onClick={()=>deleteCategory()}
-              >
-                Delete
-              </button> */}
             </div>
           </div>
         </>
